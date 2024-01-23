@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{acc57234-9c5c-4560-802d-e8821a403e91}">
+		<property name="assetPath">
+			<value>SFX/Farts/086424_small-realpoot106wav-37403.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.008</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e7af4cd9-f9fc-43e9-8620-5ddab1143870}</destination>
+		</relationship>
+	</object>
+</objects>

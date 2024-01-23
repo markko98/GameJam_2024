@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cee6011b-ae78-4087-a8a1-c6c2867829ed}">
+		<property name="assetPath">
+			<value>SFX/Farts/fart-sound-effect-39308.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0800000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e7af4cd9-f9fc-43e9-8620-5ddab1143870}</destination>
+		</relationship>
+	</object>
+</objects>

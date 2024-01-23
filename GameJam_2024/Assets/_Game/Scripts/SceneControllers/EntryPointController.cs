@@ -22,13 +22,14 @@ public class EntryPointController : AppDelegate
     {
         //setup and prewarm providers
         //SpriteProvider.Prewarm();
+        AudioProvider.Prewarm();
         ModalWindow.Instance.InitModal();
         LoadDefaultScene();
     }
 
     private void LoadDefaultScene()
     {
-        var presenter = new LoadingScreenPresenter();
+        var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
         presenter.HideLoadingScreen(animated: false);
         presenter.ShowLoadingScreen(() =>
         {
