@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Player player;
+    public Boss boss;
 
     void Start()
     {
@@ -26,10 +28,20 @@ public class GameManager : MonoBehaviour
     private void MashFailed()
     {
         Debug.Log("Mash failed!");
+        IEnumerator coroutine = WaitAndFaint();
+        StartCoroutine(coroutine);
     }
 
     private void MashSuccessful()
     {
         Debug.Log("Mash sucsessful!");
+    }
+
+    private IEnumerator WaitAndFaint()
+    {
+        yield return new WaitForSeconds(3f);
+        player.Fart();
+        yield return new WaitForSeconds(1f);
+        boss.Faint();
     }
 }

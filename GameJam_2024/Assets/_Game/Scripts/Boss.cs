@@ -6,9 +6,12 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    public static Action BossTalking;
+    public static Action BossFainted;
+
     public CinemachineVirtualCamera virtualCamera;
     public Animator animator;
-    public static Action BossTalking;
+
     public bool isTalking = false;
     public bool canInteract = true;
 
@@ -39,5 +42,12 @@ public class Boss : MonoBehaviour
         animator.SetBool("isTalking", isTalking);
         virtualCamera.gameObject.SetActive(false);
         canInteract = false;
+    }
+
+    public void Faint()
+    {
+        animator.SetBool("isFainting", true);
+        BossFainted?.Invoke();
+        StopTalking();
     }
 }
