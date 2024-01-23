@@ -46,18 +46,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuMusic:
     Guid:
-      Data1: 1384806351
-      Data2: 1151349757
-      Data3: 801130679
-      Data4: -982582123
-    Path: event:/TestEvent
+      Data1: 772522197
+      Data2: 1215970952
+      Data3: 883039422
+      Data4: -1727308981
+    Path: event:/Ambient/Office
   gameplayMusic:
     Guid:
-      Data1: 1384806351
-      Data2: 1151349757
-      Data3: 801130679
-      Data4: -982582123
-    Path: event:/TestEvent
+      Data1: -666252148
+      Data2: 1111799947
+      Data3: 1385894335
+      Data4: 1295275770
+    Path: event:/UI/Click
+  officeAmbient:
+    Guid:
+      Data1: 772522197
+      Data2: 1215970952
+      Data3: 883039422
+      Data4: -1727308981
+    Path: event:/Ambient/Office
+  ventillationAmbient:
+    Guid:
+      Data1: -502303847
+      Data2: 1183908541
+      Data3: 204764043
+      Data4: -1699124776
+    Path: event:/Ambient/Ventillation
   stomachSoundLoop:
     Guid:
       Data1: 440634537

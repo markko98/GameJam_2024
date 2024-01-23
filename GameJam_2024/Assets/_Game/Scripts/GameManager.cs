@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Collectable.Collected += Collect;
+
         MatchTextByTyping.OnTextTypedCorrectly = TypingSuccessful;
         MatchTextByTyping.OnTextTypedIncorrectly = TypingFailed;
+        // TODO - subrscibe to on time run out
+        //GameProgressTracker.OnTimeRunOut += GameOver;
     }
 
     // Update is called once per frame
