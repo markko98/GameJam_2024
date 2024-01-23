@@ -24,15 +24,21 @@ public class MainMenuController : USceneController
         //mainMenuMusic = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mainMenuMusic, AudioSceneType.MainMenu);
         //mainMenuMusic.start();
         //TODO - future play button
-        outlet.testClickSound.onClick.AddListener(() =>
-        {
-            OpenGameplayScene();
-        });
     }
 
     private void SetUIElements()
     {
+        outlet.startButton.onClick.AddListener(() =>
+        {
+            OpenGameplayScene();
+        });
+
+        outlet.quitButton.onClick.AddListener(() =>
+        {
+            Application.Quit();
+        });
     }
+
     private void OpenGameplayScene()
     {
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
