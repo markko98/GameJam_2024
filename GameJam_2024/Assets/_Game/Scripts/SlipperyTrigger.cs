@@ -15,7 +15,7 @@ public class SlipperyTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             canSlip = false;
-            other.gameObject.GetComponent<RagdollToAnimated>().LaunchPlayer();
+            other.gameObject.GetComponent<Player>().LaunchPlayer();
             StartCoroutine(WaitAndReset());
         }
     }

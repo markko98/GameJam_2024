@@ -87,7 +87,7 @@ namespace StarterAssets
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
 
-        private RagdollToAnimated ragdollToAnimated;
+        private Player player;
 
         // animation IDs
         private int _animIDSpeed;
@@ -145,7 +145,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
 
-            ragdollToAnimated = GetComponent<RagdollToAnimated>();
+            player = GetComponent<Player>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -223,7 +223,7 @@ namespace StarterAssets
 
         private void Move()
         {
-            if (ragdollToAnimated.isRagdoll) return;
+            if (player.isRagdoll) return;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = MoveSpeed;
@@ -239,7 +239,6 @@ namespace StarterAssets
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-            Debug.Log("SPEED CURR " + currentHorizontalSpeed + " -> " + targetSpeed * inputMagnitude);
             _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
                     Time.deltaTime * SpeedChangeRate);
             // accelerate or decelerate to target speed

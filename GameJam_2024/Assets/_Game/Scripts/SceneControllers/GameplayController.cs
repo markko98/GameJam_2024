@@ -80,14 +80,11 @@ public class GameplayController : USceneController
         SetupObjectives();
     }
 
-    public override void SceneWillAppear()
+    public override void SceneWillDisappear()
     {
-        base.SceneWillAppear();
-
+        base.SceneWillDisappear();
         Collectable.Collected -= OnObjectiveComplete;
         outlet.goalTrigger.GoalReached -= OnGoalTriggerReached;
         outlet.gameProgressTracker.OnTimeRunOut -= OnTimerRanOut;
-
-
     }
 }

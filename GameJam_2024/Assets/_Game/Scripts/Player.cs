@@ -2,10 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
+    public ButtonMashing buttonMashing;
+    public Collider collider;
+    public float respawnTime = 30f;
+
+    private Rigidbody[] rigibodies;
+    public bool isRagdoll;
+    private Animator animator;
+
+    private static readonly int Idle = Animator.StringToHash("Idle");
+
+    private CharacterController characterController;
+    private float speed = 5f;
+    private float turnSpeed = 20f;
+
+    private Action AnimationDone;
+    
     public static Action OnFart;
     public static Action OnFartEnd;
 
@@ -18,11 +33,20 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        rigibodies = GetComponentsInChildren<Rigidbody>();
+        animator = GetComponent<Animator>();
+
+        characterController = GetComponent<CharacterController>();
+        characterController.detectCollisions = true;
+
+        ToggleRagdoll(true);
+        
         Boss.OnBossTalking += LookAtBoss;
         Boss.OnBossFainted += StopLookingAtBoss;
+        
+        RegisterEvent(EventType.ButtonMash);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (shouldLook)
@@ -34,6 +58,71 @@ public class Player : MonoBehaviour
         {
             Fart();
         }
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LaunchPlayer();
+        }
+
+        if (animator.IsAnimationPlaying("Get Up")) return;
+        if (AnimationDone == null) return;
+        
+        AnimationDone.Invoke();
+        AnimationDone = null;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!isRagdoll && other.gameObject.CompareTag("Door"))
+        {
+            LaunchPlayer();
+        }
+    }
+
+    public void LaunchPlayer()
+    {
+        ToggleRagdoll(false);
+        buttonMashing.StartMashing();
+    }
+
+    private void GetBackUpWithTimer()
+    {
+        StartCoroutine(GetBackUp(respawnTime));
+    }
+
+    private void GetBackUp()
+    {
+        ToggleRagdoll(true, true);
+    }
+
+    private IEnumerator GetBackUp(float time)
+    {
+        yield return new WaitForSeconds(time);
+        ToggleRagdoll(true, true);
+    }
+
+    private void ToggleRagdoll(bool isAnimating, bool getUp = false)
+    {
+        isRagdoll = !isAnimating;
+
+        collider.enabled = isAnimating;
+        foreach (var bone in rigibodies)
+        {
+            bone.isKinematic = isAnimating;
+        }
+
+        animator.enabled = isAnimating;
+
+        if (!getUp) return;
+        isRagdoll = true;
+        AnimationDone = AnimatorDoneCallback;
+        animator.Play("Get Up");
+    }
+
+
+    private void AnimatorDoneCallback()
+    {
+        isRagdoll = false;
     }
 
     public void Fart()
@@ -77,6 +166,8 @@ public class Player : MonoBehaviour
                 GameEvent.EventFailed += () => StartCoroutine(WaitAndFart());
                 break;
             case EventType.ButtonMash:
+                GameEvent.EventSuccessfull += GetBackUp;
+                GameEvent.EventFailed += GetBackUpWithTimer;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -93,11 +184,11 @@ public class Player : MonoBehaviour
                 GameEvent.EventFailed -= () => StartCoroutine(WaitAndFart());
                 break;
             case EventType.ButtonMash:
+                GameEvent.EventSuccessfull -= GetBackUp;
+                GameEvent.EventFailed -= GetBackUpWithTimer;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
 }
-
-

@@ -14,7 +14,7 @@ public class DartTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             canSlip = false;
-            other.gameObject.GetComponent<RagdollToAnimated>().LaunchPlayer();
+            other.gameObject.GetComponent<Player>().LaunchPlayer();
             animator.Play("Throw");
         }
     }

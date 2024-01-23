@@ -21,7 +21,7 @@ public class DoorTrigger : MonoBehaviour
             doorOpened = true;
             if (!shouldLaunch) return;
             
-            other.gameObject.GetComponent<RagdollToAnimated>().LaunchPlayer();
+            other.gameObject.GetComponent<Player>().LaunchPlayer();
         }
     }
 }

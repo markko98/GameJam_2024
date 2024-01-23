@@ -6,7 +6,7 @@ public class Collectable : MonoBehaviour
     public ObjectiveType type;
     public static Action<ObjectiveType> Collected;
 
-    private Canvas canvas;
+    [SerializeField] private Canvas canvas;
     private bool isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
