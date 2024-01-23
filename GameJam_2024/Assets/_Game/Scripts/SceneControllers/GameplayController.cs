@@ -13,21 +13,38 @@ public class GameplayController : USceneController
     private EventInstance fartSound;
 
     private ObjectiveController objectiveController = new ObjectiveController();
-
+    string tutorialText = "1.Limber up with a quick office stretch, but not for too long.\r\n\r\n2. Gather essential items on your way. A clever pooper knows what's needed for a successful bathroom mission.\r\n\r\n3. Celebrate with a well-deserved relief!";
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
         outlet = GameObject.Find(SceneOutlets.Gameplay).GetComponent<GameplayOutlet>();
 
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
-        presenter.HideLoadingScreen();
-
-        outlet.gameProgressTracker.Setup();
+        presenter.HideLoadingScreen(animated: false);
+        presenter.ShowLoadingScreen(() =>
+        { 
+            var modalData = new ModalData()
+            {
+                title = "Tutorial",
+                message = tutorialText,
+                option1 = "Okay",
+                option1Callback = () => {
+                    StartGame();
+                },
+            };
+            ModalWindow.Instance.ShowModal(modalData);
+        });
+        
 
         outlet.gameProgressTracker.OnTimeRunOut += OnTimerRanOut;
         outlet.goalTrigger.GoalReached += OnGoalTriggerReached;
         
         SetupSound();
+    }
+
+    private void StartGame()
+    {
+        outlet.gameProgressTracker.Setup();
         SetUIElements();
     }
 
