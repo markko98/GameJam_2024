@@ -104,8 +104,8 @@ public class ModalWindow
     {
         currentModal.Modal_Footer_Option1BTN_Option1TXT.text = option1;
         currentModal.Modal_Footer_Option2BTN_Option2TXT.text = option2;
-        currentModal.Modal_Footer_Option1BTN.gameObject.SetActive(true);
-        currentModal.Modal_Footer_Option2BTN.gameObject.SetActive(true);
+        currentModal.Modal_Footer_Option1BTN.gameObject.SetActive(option1 != "");
+        currentModal.Modal_Footer_Option2BTN.gameObject.SetActive(option2 != "");
     }
     void SetCallbacks(UnityAction option1Callback, UnityAction option2Callback, UnityAction hideCallback)
     {

@@ -112,6 +112,7 @@ namespace StarterAssets
 
         private bool _hasAnimator;
         private Vector2 moveLastFrame;
+        public bool CanWalk;
 
         private bool IsCurrentDeviceMouse
         {
@@ -162,10 +163,12 @@ namespace StarterAssets
             _hasAnimator = TryGetComponent(out _animator);
 
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            if (CanWalk)
+            {
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+            }
         }
 
         private void LateUpdate()

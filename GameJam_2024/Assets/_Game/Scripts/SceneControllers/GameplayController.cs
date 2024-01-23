@@ -22,22 +22,23 @@ public class GameplayController : USceneController
         base.SceneDidLoad();
         outlet = GameObject.Find(SceneOutlets.Gameplay).GetComponent<GameplayOutlet>();
 
+        outlet.playerController.CanWalk = false;
+
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
-        presenter.HideLoadingScreen(animated: false);
-        presenter.ShowLoadingScreen(() =>
-        { 
-            var modalData = new ModalData()
-            {
-                title = "Tutorial",
-                message = tutorialText,
-                option1 = "Okay",
-                option1Callback = () => {
-                    StartGame();
-                },
-            };
-            ModalWindow.Instance.ShowModal(modalData);
-        });
-        
+        presenter.HideLoadingScreen();
+
+        var modalData = new ModalData()
+        {
+            title = "Tutorial",
+            message = tutorialText,
+            option1 = "Okay",
+            option2 = "",
+            option1Callback = () => {
+                StartGame();
+            },
+            option2Callback = null
+        };
+        ModalWindow.Instance.ShowModal(modalData);
 
         outlet.gameProgressTracker.OnTimeRunOut += OnTimerRanOut;
         outlet.goalTrigger.GoalReached += OnGoalTriggerReached;
@@ -49,7 +50,10 @@ public class GameplayController : USceneController
     {
         outlet.gameProgressTracker.Setup();
         SetUIElements();
+        outlet.playerController.CanWalk = true;
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GameTicker.SharedInstance.Update += Update;
     }
 

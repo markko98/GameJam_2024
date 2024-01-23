@@ -15,7 +15,9 @@ public class EndGameController: USceneController
     {
         base.SceneDidLoad();
         outlet = GameObject.Find(SceneOutlets.EndGameOutlet).GetComponent<EndGameOutlet>();
-        
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SetupUIElements();
     }
 
