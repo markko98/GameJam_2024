@@ -1481,7 +1481,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 104889206}
   shouldResetApp: 1
-  testClickSound: {fileID: 1695546041}
+  startButton: {fileID: 1695546041}
+  quitButton: {fileID: 629816405}
 --- !u!4 &1262128059
 Transform:
   m_ObjectHideFlags: 0
