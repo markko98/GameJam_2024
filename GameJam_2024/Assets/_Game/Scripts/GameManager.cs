@@ -7,11 +7,14 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Boss boss;
 
+    public bool isMagazineCollected;
+    public bool isPaperCollected;
+
     void Start()
     {
         Collectable.Collected += Collect;
-        ButtonMashing.MashingFailed += MashFailed;
-        ButtonMashing.MashingSuccessful += MashSuccessful;
+        MatchTextByTyping.OnTextTypedCorrectly = TypingSuccessful;
+        MatchTextByTyping.OnTextTypedIncorrectly = TypingFailed;
     }
 
     // Update is called once per frame
@@ -22,19 +25,30 @@ public class GameManager : MonoBehaviour
 
     private void Collect(string type)
     {
+        if (type == "Magazine")
+        {
+            isMagazineCollected = true;
+        }
+        else if (type == "ToiletPaper")
+        {
+            isPaperCollected = true;
+        }
+        // TODO
         Debug.Log(type + " is collected!");
     }
 
-    private void MashFailed()
+    private void TypingFailed()
     {
-        Debug.Log("Mash failed!");
+        Debug.Log("Typing failed!");
         IEnumerator coroutine = WaitAndFaint();
         StartCoroutine(coroutine);
     }
 
-    private void MashSuccessful()
+    private void TypingSuccessful()
     {
-        Debug.Log("Mash sucsessful!");
+        Debug.Log("Typing sucsessful!");
+        player.StopLookingAtBoss();
+        boss.StopTalking();
     }
 
     private IEnumerator WaitAndFaint()
@@ -43,5 +57,16 @@ public class GameManager : MonoBehaviour
         player.Fart();
         yield return new WaitForSeconds(1f);
         boss.Faint();
+    }
+
+    public bool IsCollectionCompleted()
+    {
+        return isMagazineCollected && isPaperCollected;
+    }
+
+    public void GameOver()
+    {
+        // TODO
+        Debug.Log("Congratulations, You shit well!");
     }
 }

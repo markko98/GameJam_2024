@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
+    public static Action OnFart;
+    public static Action OnFartEnd;
+
     public ParticleSystem fart;
     public Transform boss;
     public Transform playerArmeture;
@@ -12,9 +16,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Boss.BossTalking += LookAtBoss;
-        Boss.BossFainted += StopLookingAtBoss;
-        ButtonMashing.MashingSuccessful += StopLookingAtBoss;
+        Boss.OnBossTalking += LookAtBoss;
+        Boss.OnBossFainted += StopLookingAtBoss;
     }
 
     // Update is called once per frame
@@ -24,23 +27,32 @@ public class Player : MonoBehaviour
         {
             playerArmeture.LookAt(boss);
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Fart();
+        }
     }
 
     public void Fart()
     {
+        // TODO
         Debug.Log("Fart Sound!");
+        OnFart?.Invoke();
         fart.Play();
         ParticleSystem.EmissionModule em = fart.emission;
         em.enabled = true;
+
     }
 
-    private void LookAtBoss()
+    public void LookAtBoss()
     {
         shouldLook = true;
     }
 
-    private void StopLookingAtBoss()
+    public void StopLookingAtBoss()
     {
         shouldLook = false;
+        OnFartEnd?.Invoke();
     }
 }

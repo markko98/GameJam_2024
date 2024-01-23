@@ -1,14 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ButtonMashing : MonoBehaviour
 {
 
-    public static Action MashingFailed;
-    public static Action MashingSuccessful;
+    public static Action OnMashingFailed;
+    public static Action OnMashingSuccessful;
 
     public Canvas canvas;
     public KeyCode keyCode;
@@ -22,7 +20,6 @@ public class ButtonMashing : MonoBehaviour
 
     void Start()
     {
-        Boss.BossTalking += StartMashing;
         mash = mashDelay;
     }
 
@@ -45,13 +42,13 @@ public class ButtonMashing : MonoBehaviour
             if (count >= requiredTimes)
             {
                 StopMashing();
-                MashingSuccessful?.Invoke();
+                OnMashingSuccessful?.Invoke();
             }
 
             if (mash <= 0)
             {
                 StopMashing();
-                MashingFailed?.Invoke();
+                OnMashingFailed?.Invoke();
             }
         }
     }

@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public static Action BossTalking;
-    public static Action BossFainted;
+    public static Action OnBossTalking;
+    public static Action OnBossFainted;
 
     public CinemachineVirtualCamera virtualCamera;
     public Animator animator;
@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
-        ButtonMashing.MashingSuccessful += StopTalking;
+        MatchTextByTyping.OnTextTypedCorrectly += StopTalking;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,15 +28,15 @@ public class Boss : MonoBehaviour
         }
     }
 
-    private void StartTalking()
+    public void StartTalking()
     {
         isTalking = true;
         virtualCamera.gameObject.SetActive(true);
         animator.SetBool("isTalking", isTalking);
-        BossTalking?.Invoke();
+        OnBossTalking?.Invoke();
     }
 
-    private void StopTalking()
+    public void StopTalking()
     {
         isTalking = false;
         animator.SetBool("isTalking", isTalking);
@@ -47,7 +47,7 @@ public class Boss : MonoBehaviour
     public void Faint()
     {
         animator.SetBool("isFainting", true);
-        BossFainted?.Invoke();
+        OnBossFainted?.Invoke();
         StopTalking();
     }
 }
