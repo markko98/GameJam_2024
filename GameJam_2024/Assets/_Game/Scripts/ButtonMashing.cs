@@ -48,22 +48,24 @@ public class ButtonMashing : GameEvent
         }
     }
 
-    private void StartMashing()
+    public void StartMashing()
     {
-        IEnumerator coroutine = WaitAndStart(2.0f);
+        IEnumerator coroutine = WaitAndStart(1f);
         StartCoroutine(coroutine);
     }
 
-    private void StopMashing()
+    public void StopMashing()
     {
+        count = 0;
         started = false;
-        canvas.gameObject.SetActive(false);
+        Debug.Log("Mashing stopped!");
     }
 
     private IEnumerator WaitAndStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         started = true;
-        canvas.gameObject.SetActive(true);
+        // TODO - Inform player
+        Debug.Log("Mashing started!");
     }
 }
