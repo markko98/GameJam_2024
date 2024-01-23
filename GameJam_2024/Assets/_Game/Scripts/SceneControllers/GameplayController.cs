@@ -44,7 +44,13 @@ public class GameplayController : USceneController
         if (objectiveController.CanFinishGame())
         {
             // SHow same success screen;
-            Debug.Log("Done");
+            var endGameDetails = new EndGameDetails()
+            {
+                isVictory = true,
+                timeRemaining = outlet.gameProgressTracker.CurrentTime
+            };
+            var endGameController = new EndGameController(endGameDetails);
+            PushSceneController(endGameController);
             return;
         }
 
@@ -54,7 +60,13 @@ public class GameplayController : USceneController
 
     public void OnTimerRanOut()
     {
-        Debug.Log("Game Over");
+        var endGameDetails = new EndGameDetails()
+        {
+            isVictory = false,
+            timeRemaining = outlet.gameProgressTracker.CurrentTime
+        };
+        var endGameController = new EndGameController(endGameDetails);
+        PushSceneController(endGameController);
     }
 
     private void SetupObjectives()
