@@ -6,8 +6,5 @@ using UnityEngine.UI;
 
 public class GameplayOutlet : SceneControllerOutlet
 {
-    public Transform timerHolder;
-    public Slider timerSlider;
-    public Image timerSliderFillImage;
-    public TextMeshProUGUI timerText;
+    public GameProgressTracker gameProgressTracker;
 }

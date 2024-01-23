@@ -75,38 +75,6 @@ public class AudioManager : MonoBehaviour
         //sfxBus.setVolume(SFXVolume);
     }
 
-    public void PlayAmbientMusic(EventReference ambienceEventReference, AudioSceneType sceneType)
-    {
-        ambienceEventInstance = CreateInstance(ambienceEventReference, sceneType);
-        ambienceEventInstance.start();
-    }
-    public void StopAmbientMusic()
-    {
-        if (ambienceEventInstance.IsUnityNull())
-        {
-            return;
-        }
-
-        ambienceEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        ambienceEventInstance.release();
-    }
-
-    public void PlayMainMenuMusic(EventReference musicEventReference, AudioSceneType sceneType)
-    {
-        musicEventInstance = CreateInstance(musicEventReference, sceneType);
-        musicEventInstance.start();
-    }
-    public void StopMainMenuMusic()
-    {
-        if (musicEventInstance.IsUnityNull())
-        {
-            return;
-        }
-
-        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        musicEventInstance.release();
-    }
-
     public void SetGameplayAmbienceParameter(string parameterName, float parameterValue)
     {
         ambienceEventInstance.setParameterByName(parameterName, parameterValue);
@@ -151,15 +119,20 @@ public class AudioManager : MonoBehaviour
         var sceneTypeInstances = eventInstances.Where(x=>x.Key == sceneType);
         var sceneTypeEmitters = eventEmitters.Where(x => x.Key == sceneType);
 
-        //TODO - cleanup
-        //foreach (var eventInstance in sceneTypeInstances)
-        //{
-        //    eventInstance.Value.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        //    eventInstance.Value.release();
-        //}
-        //foreach (var eventEmitter in sceneTypeEmitters)
-        //{
-        //    eventEmitter.Value.Stop();
-        //}
+        foreach (var eventInstance in sceneTypeInstances)
+        {
+            foreach (var val in eventInstance.Value)
+            {
+                val.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                val.release();
+            }
+        }
+        foreach (var eventEmitter in sceneTypeEmitters)
+        {
+            foreach (var val in eventEmitter.Value)
+            {
+                val.Stop();
+            }
+        }
     }
 }
