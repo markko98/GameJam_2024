@@ -4,5 +4,6 @@ using UnityEngine.UI;
 
 public class MainMenuOutlet : SceneControllerOutlet
 {
-    public Button testClickSound;
+    public Button startButton;
+    public Button quitButton;
 }

@@ -2,6 +2,7 @@ using FMOD.Studio;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class MainMenuController : USceneController
 {    public MainMenuController() : base(SceneNames.MainMenu) { }
@@ -11,6 +12,9 @@ public class MainMenuController : USceneController
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; 
         outlet = GameObject.Find(SceneOutlets.MainMenu).GetComponent<MainMenuOutlet>();
 
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
@@ -24,15 +28,21 @@ public class MainMenuController : USceneController
         //mainMenuMusic = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mainMenuMusic, AudioSceneType.MainMenu);
         //mainMenuMusic.start();
         //TODO - future play button
-        outlet.testClickSound.onClick.AddListener(() =>
-        {
-            OpenGameplayScene();
-        });
     }
 
     private void SetUIElements()
     {
+        outlet.startButton.onClick.AddListener(() =>
+        {
+            OpenGameplayScene();
+        });
+
+        outlet.quitButton.onClick.AddListener(() =>
+        {
+            Application.Quit();
+        });
     }
+
     private void OpenGameplayScene()
     {
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
@@ -45,17 +55,3 @@ public class MainMenuController : USceneController
         });
     }
 }
-//() => {
-
-//    var modalData = new ModalData()
-//    {
-//        title = "Out of Energy",
-//        message = "Take a look at some of the options",
-//        option1 = "Watch an Add",
-//        option2 = "Buy refill",
-//        option1Callback = () => Debug.Log("CONFIRM"),
-//        option2Callback = () => Debug.Log("DENY"),
-//        hideCallback = () => Debug.Log("CLOSE"),
-//    };
-//    ModalWindow.Instance.ShowModal(modalData);
-//}
