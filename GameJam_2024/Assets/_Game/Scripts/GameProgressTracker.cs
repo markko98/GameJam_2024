@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,6 +32,9 @@ public class GameProgressTracker : MonoBehaviour
     [SerializeField] Image timerSliderFillImage;
     [SerializeField] TextMeshProUGUI timerText;
 
+    [SerializeField] Color fullColor;
+    [SerializeField] Color emptyColor;
+
     public static System.Action OnTimeRunOut;
     public static System.Action<float> OnTimeChange;
 
@@ -47,7 +51,9 @@ public class GameProgressTracker : MonoBehaviour
     private void UpdateView()
     {
         timerText.SetText(Utils.FormatTime(CurrentTime));
-        timerSlider.value = CurrentTime / initialTime;
+        timerSlider.DOValue(CurrentTime / initialTime, 0.25f);
+        var endColor = Color.Lerp(emptyColor, fullColor, CurrentTime/initialTime);
+        timerSliderFillImage.DOColor(endColor, 0.25f);
     }
 
     public void AddTime(float amount)

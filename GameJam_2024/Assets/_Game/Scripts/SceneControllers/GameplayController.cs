@@ -10,7 +10,6 @@ public class GameplayController : USceneController
     private GameplayOutlet outlet;
 
     private EventInstance officeAmbient;
-    private EventInstance ventillationAmbient;
     private EventInstance stomachGrowlLoop;
     private EventInstance stomachGrowl;
     private EventInstance fartSound;
@@ -32,13 +31,11 @@ public class GameplayController : USceneController
     private void SetupSound()
     {
         officeAmbient = AudioManager.Instance.CreateInstance(AudioProvider.Instance.officeAmbient, AudioSceneType.Gameplay);
-        ventillationAmbient = AudioManager.Instance.CreateInstance(AudioProvider.Instance.ventillationAmbient, AudioSceneType.Gameplay);
         stomachGrowlLoop = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSoundLoop, AudioSceneType.Gameplay);
         stomachGrowl = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSound, AudioSceneType.Gameplay);
         fartSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fartSound, AudioSceneType.Gameplay);
 
         officeAmbient.start();
-        ventillationAmbient.start();
         stomachGrowlLoop.start();
     }
 

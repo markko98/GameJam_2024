@@ -7,4 +7,5 @@ using UnityEngine.UI;
 public class GameplayOutlet : SceneControllerOutlet
 {
     public GameProgressTracker gameProgressTracker;
+    public ObjectiveController objectiveController;
 }

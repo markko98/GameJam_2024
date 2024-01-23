@@ -23,6 +23,7 @@ public class EntryPointController : AppDelegate
         //setup and prewarm providers
         //SpriteProvider.Prewarm();
         AudioProvider.Prewarm();
+        ColorProvider.Prewarm();
         ModalWindow.Instance.InitModal();
         LoadDefaultScene();
     }
