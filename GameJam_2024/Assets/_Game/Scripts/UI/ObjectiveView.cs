@@ -1,7 +1,4 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,15 +14,20 @@ public class ObjectiveView : MonoBehaviour
     public void Setup(string objective)
     {
         isCompleted = false;
-        checkboxImage.DOColor(ColorProvider.Instance.redColor, 0f);
         objectiveText.SetText(objective);
         UpdateView();
     }
     public void SetDone()
     {
         isCompleted = true;
-        checkboxImage.DOColor(ColorProvider.Instance.greenColor, 0.25f);
         UpdateView();
+
+        var sequence = DOTween.Sequence();
+        sequence
+            .Append(transform.DOScale(1.2f, 0.2f))
+            .Append(transform.DOScale(1, 0.2f))
+            .Append(transform.DOMove(new Vector3(-100f, transform.position.y, transform.position.z), 0.2f))
+            .OnComplete(() => gameObject.transform.SetParent(null));
     }
 
     private void UpdateView()

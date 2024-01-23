@@ -2,12 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class ButtonMashing : MonoBehaviour
+public class ButtonMashing : GameEvent
 {
-
-    public static Action OnMashingFailed;
-    public static Action OnMashingSuccessful;
-
     public KeyCode keyCode;
     public float mashDelay = 0.5f;
     public float requiredTimes = 10;
@@ -41,13 +37,13 @@ public class ButtonMashing : MonoBehaviour
             if (count >= requiredTimes)
             {
                 StopMashing();
-                OnMashingSuccessful?.Invoke();
+                EventSuccessfull?.Invoke();
             }
 
             if (mash <= 0)
             {
                 StopMashing();
-                OnMashingFailed?.Invoke();
+                EventFailed?.Invoke();
             }
         }
     }

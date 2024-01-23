@@ -11,14 +11,15 @@ public class Player : MonoBehaviour
 
     public ParticleSystem fart;
     public Transform boss;
-    public Transform playerArmeture;
+    public Transform playerArmature;
     public bool shouldLook = false;
+
+    private EventType currentEvent;
 
     void Start()
     {
         Boss.OnBossTalking += LookAtBoss;
         Boss.OnBossFainted += StopLookingAtBoss;
-        MatchTextByTyping.OnTextTypedCorrectly += StopLookingAtBoss;
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     {
         if (shouldLook)
         {
-            playerArmeture.LookAt(boss);
+            playerArmature.LookAt(boss);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -43,7 +44,8 @@ public class Player : MonoBehaviour
         fart.Play();
         ParticleSystem.EmissionModule em = fart.emission;
         em.enabled = true;
-
+        
+        DeregisterEvent(currentEvent);
     }
 
     public void LookAtBoss()
@@ -55,5 +57,47 @@ public class Player : MonoBehaviour
     {
         shouldLook = false;
         OnFartEnd?.Invoke();
+        
+        DeregisterEvent(currentEvent);
+    }
+    
+    private IEnumerator WaitAndFart()
+    {
+        yield return new WaitForSeconds(3f);
+        Fart();
+    }
+
+    public void RegisterEvent(EventType type)
+    {
+        currentEvent = type;
+        switch (type)
+        {
+            case EventType.MatchText:
+                GameEvent.EventSuccessfull += StopLookingAtBoss;
+                GameEvent.EventFailed += () => StartCoroutine(WaitAndFart());
+                break;
+            case EventType.ButtonMash:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+        
+    }
+
+    public void DeregisterEvent(EventType type)
+    {
+        switch (type)
+        {
+            case EventType.MatchText:
+                GameEvent.EventSuccessfull -= StopLookingAtBoss;
+                GameEvent.EventFailed -= () => StartCoroutine(WaitAndFart());
+                break;
+            case EventType.ButtonMash:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
     }
 }
+
+

@@ -59,15 +59,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4293933, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f134a9b7449aa964abe6b78a49a9d475, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -191,8 +191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCompleted: 0
   checkboxImage: {fileID: 4786298508331985549}
-  checkBoxCompleted: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  checkBoxNotCompleted: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  checkBoxCompleted: {fileID: 21300000, guid: f134a9b7449aa964abe6b78a49a9d475, type: 3}
+  checkBoxNotCompleted: {fileID: 21300000, guid: b66c32130db23194f81955bed4b248cd,
+    type: 3}
   objectiveText: {fileID: 4068766430902776281}
 --- !u!1 &7898740058953597665
 GameObject:
