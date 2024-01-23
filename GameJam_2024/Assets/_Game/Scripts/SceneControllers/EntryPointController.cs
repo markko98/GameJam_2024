@@ -29,7 +29,7 @@ public class EntryPointController : AppDelegate
 
     private void LoadDefaultScene()
     {
-        var presenter = new LoadingScreenPresenter();
+        var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
         presenter.HideLoadingScreen(animated: false);
         presenter.ShowLoadingScreen(() =>
         {

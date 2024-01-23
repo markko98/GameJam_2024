@@ -13,8 +13,11 @@
 			<value>Event Editor 1</value>
 		</property>
 		<property name="windowLayout">
-			<value>AAAAAQAAABwARQB2AGUAbgB0ACAARQBkAGkAdABvAHIAIAAxAAAAQgHZ0MsAAwAA//////////gAAAoAAAAFcAAAA8AAAAHIAAAH3wAAA2sAAAAAAgAAAAoAAAAAAAAAABcAAAn/AAAFbw==</value>
+			<value>AAAAAQAAABwARQB2AGUAbgB0ACAARQBkAGkAdABvAHIAIAAxAAAAQgHZ0MsAAwAA///7x////m0AAAAAAAAFxf//+98AAADL/////gAAAm4AAAABAgAAAAQ4///7yP///oz/////AAAFxA==</value>
 		</property>
+		<relationship name="activePlatform">
+			<destination>{57f1f543-ab7d-42a4-936b-623576ca33fc}</destination>
+		</relationship>
 	</object>
 	<object class="WorkspaceChangelist" id="{1f63ca2b-7fed-4461-95d8-d54ccec070e0}" />
 </objects>

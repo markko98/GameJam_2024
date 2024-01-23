@@ -17,7 +17,7 @@
 			<value>73.846167800453514</value>
 		</property>
 		<relationship name="masterAssetFolder">
-			<destination>{53f80630-bcb7-49e5-9e1d-dc02586da456}</destination>
+			<destination>{e7af4cd9-f9fc-43e9-8620-5ddab1143870}</destination>
 		</relationship>
 	</object>
 </objects>

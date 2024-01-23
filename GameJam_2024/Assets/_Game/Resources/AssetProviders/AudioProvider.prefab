@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1551266661863115923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2877780157700363541}
+  - component: {fileID: 8969262522587010534}
+  m_Layer: 0
+  m_Name: AudioProvider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2877780157700363541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551266661863115923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8969262522587010534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551266661863115923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c99f7ee3a9929a448d6bcdce9f78ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuMusic:
+    Guid:
+      Data1: 1384806351
+      Data2: 1151349757
+      Data3: 801130679
+      Data4: -982582123
+    Path: event:/TestEvent
+  gameplayMusic:
+    Guid:
+      Data1: 1384806351
+      Data2: 1151349757
+      Data3: 801130679
+      Data4: -982582123
+    Path: event:/TestEvent
+  stomachSoundLoop:
+    Guid:
+      Data1: 440634537
+      Data2: 1196419500
+      Data3: -1892111469
+      Data4: 975745964
+    Path: event:/SFX/StomachGrowl_Constant
+  stomachSound:
+    Guid:
+      Data1: -1375453925
+      Data2: 1301693763
+      Data3: -857488709
+      Data4: -865911912
+    Path: event:/SFX/StomachGrowl_Random
+  fartSound:
+    Guid:
+      Data1: 1904687882
+      Data2: 1303480901
+      Data3: 1359193014
+      Data4: 2025531731
+    Path: event:/SFX/Farts
+  fartSoundHuge:
+    Guid:
+      Data1: -463579272
+      Data2: 1283495175
+      Data3: -161422973
+      Data4: 124268467
+    Path: event:/SFX/HugeFart
+  hoverUI:
+    Guid:
+      Data1: -290793959
+      Data2: 1094469353
+      Data3: 1095879099
+      Data4: 2061791146
+    Path: event:/UI/Hover
+  clickUI:
+    Guid:
+      Data1: -666252148
+      Data2: 1111799947
+      Data3: 1385894335
+      Data4: 1295275770
+    Path: event:/UI/Click
