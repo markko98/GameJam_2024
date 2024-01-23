@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,13 @@ public class MatchTextByTyping : MonoBehaviour
 
     void StartTyping()
     {
+        StartCoroutine(WaitAndStart());
+    }
+
+    IEnumerator WaitAndStart()
+    {
+
+        yield return new WaitForSeconds(1);
         canvas.gameObject.SetActive(true);
         Keyboard.current.onTextInput += OnTextInput;
         isTyping = true;

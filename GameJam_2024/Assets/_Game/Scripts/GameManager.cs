@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour
     private void TypingFailed()
     {
         Debug.Log("Typing failed!");
-        IEnumerator coroutine = WaitAndFaint();
-        StartCoroutine(coroutine);
+        StartCoroutine(WaitAndFaint());
     }
 
     private void TypingSuccessful()
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         player.Fart();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         boss.Faint();
     }
 
