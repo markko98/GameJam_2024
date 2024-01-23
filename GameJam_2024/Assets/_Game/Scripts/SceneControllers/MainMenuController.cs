@@ -2,6 +2,7 @@ using FMOD.Studio;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class MainMenuController : USceneController
 {    public MainMenuController() : base(SceneNames.MainMenu) { }
@@ -11,6 +12,9 @@ public class MainMenuController : USceneController
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; 
         outlet = GameObject.Find(SceneOutlets.MainMenu).GetComponent<MainMenuOutlet>();
 
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
