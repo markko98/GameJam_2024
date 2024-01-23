@@ -35,6 +35,8 @@ public class GameProgressTracker : MonoBehaviour
     [SerializeField] Color fullColor;
     [SerializeField] Color emptyColor;
 
+    bool didGameStart = false;
+
     public Action OnTimeRunOut;
     public Action<float> OnTimeChange;
 
@@ -42,11 +44,14 @@ public class GameProgressTracker : MonoBehaviour
 
     public void Setup()
     {
+        didGameStart = true;
         CurrentTime = initialTime;
     }
     private void Update()
     {
-        DecreaseTime(Time.deltaTime);
+        if (!didGameStart) return;
+
+        DecreaseTime(GameTicker.DeltaTime);
     }
     private void UpdateView()
     {
