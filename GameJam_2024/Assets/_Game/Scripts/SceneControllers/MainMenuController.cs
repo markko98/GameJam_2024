@@ -7,9 +7,6 @@ public class MainMenuController : USceneController
 {
     public MainMenuController() : base(SceneNames.MainMenu) { }
     private MainMenuOutlet outlet;
-    private EventInstance stomachGrowlLoop;
-    private EventInstance stomachGrowl;
-    private EventInstance fartSound;
 
     public override void SceneDidLoad()
     {
@@ -37,25 +34,26 @@ public class MainMenuController : USceneController
 
     private void SetupSound()
     {
-        stomachGrowlLoop = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSoundLoop);
-        stomachGrowl = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSound);
-        fartSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fartSound);
-        stomachGrowlLoop.start();
-
-        //AudioManager.Instance.PlayMainMenuMusic(AudioProvider.Instance.mainMenuMusic);
+        AudioManager.Instance.PlayMainMenuMusic(AudioProvider.Instance.mainMenuMusic, AudioSceneType.MainMenu);
         //TODO - future play button
         outlet.testClickSound.onClick.AddListener(() => {
             //AudioManager.Instance.StopMainMenuMusic();
-            stomachGrowl.start();
+            OpenGameplayScene();
         });
     }
 
     private void SetUIElements()
     {
     }
-    private void OpenNextScene()
+    private void OpenGameplayScene()
     {
-        //var nextScene = new NextSceneController();
-        //PushSceneController(nextScene);
+        var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
+        presenter.HideLoadingScreen(animated: false);
+        presenter.ShowLoadingScreen(() =>
+        {
+            AudioManager.Instance.CleanUp(AudioSceneType.MainMenu);
+            var gameplayScene = new GameplayController();
+            PushSceneController(gameplayScene);
+        });
     }
 }

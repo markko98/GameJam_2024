@@ -3,9 +3,11 @@ using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum AudioSceneType { MainMenu, Gameplay, Global }
 public class AudioManager : MonoBehaviour
 {
     [Header("Volume")]
@@ -23,8 +25,8 @@ public class AudioManager : MonoBehaviour
     private Bus ambienceBus;
     private Bus sfxBus;
 
-    private List<EventInstance> eventInstances;
-    private List<StudioEventEmitter> eventEmitters;
+    private Dictionary<AudioSceneType, List<EventInstance>> eventInstances;
+    private Dictionary<AudioSceneType, List<StudioEventEmitter>> eventEmitters;
 
     private EventInstance ambienceEventInstance;
     private EventInstance musicEventInstance;
@@ -56,8 +58,8 @@ public class AudioManager : MonoBehaviour
 
     private void SetupForSounds()
     {
-        eventInstances = new List<EventInstance>();
-        eventEmitters = new List<StudioEventEmitter>();
+        eventInstances = new Dictionary<AudioSceneType, List<EventInstance>>();
+        eventEmitters = new Dictionary<AudioSceneType, List<StudioEventEmitter>>();
 
         //masterBus = RuntimeManager.GetBus("bus:/");
         //musicBus = RuntimeManager.GetBus("bus:/Music");
@@ -73,9 +75,9 @@ public class AudioManager : MonoBehaviour
         //sfxBus.setVolume(SFXVolume);
     }
 
-    public void PlayAmbientMusic(EventReference ambienceEventReference)
+    public void PlayAmbientMusic(EventReference ambienceEventReference, AudioSceneType sceneType)
     {
-        ambienceEventInstance = CreateInstance(ambienceEventReference);
+        ambienceEventInstance = CreateInstance(ambienceEventReference, sceneType);
         ambienceEventInstance.start();
     }
     public void StopAmbientMusic()
@@ -89,9 +91,9 @@ public class AudioManager : MonoBehaviour
         ambienceEventInstance.release();
     }
 
-    public void PlayMainMenuMusic(EventReference musicEventReference)
+    public void PlayMainMenuMusic(EventReference musicEventReference, AudioSceneType sceneType)
     {
-        musicEventInstance = CreateInstance(musicEventReference);
+        musicEventInstance = CreateInstance(musicEventReference, sceneType);
         musicEventInstance.start();
     }
     public void StopMainMenuMusic()
@@ -115,33 +117,49 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
-    public EventInstance CreateInstance(EventReference eventReference)
+    public EventInstance CreateInstance(EventReference eventReference, AudioSceneType sceneType)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
-        eventInstances.Add(eventInstance);
+        if (eventInstances.ContainsKey(sceneType))
+        {
+            eventInstances[sceneType].Add(eventInstance);
+        }
+        else
+        {
+            eventInstances[sceneType] = new List<EventInstance>();
+        }
         return eventInstance;
     }
 
-    public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)
+    public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject, AudioSceneType sceneType)
     {
         StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
         emitter.EventReference = eventReference;
-        eventEmitters.Add(emitter);
+        if (eventEmitters.ContainsKey(sceneType))
+        {
+            eventEmitters[sceneType].Add(emitter);
+        }
+        else
+        {
+            eventEmitters[sceneType] = new List<StudioEventEmitter>();
+        }
         return emitter;
     }
 
-    public void CleanUp()
+    public void CleanUp(AudioSceneType sceneType)
     {
-        // stop and release any created instances
-        foreach (EventInstance eventInstance in eventInstances)
-        {
-            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            eventInstance.release();
-        }
-        // stop all of the event emitters, because if we don't they may hang around in other scenes
-        foreach (StudioEventEmitter emitter in eventEmitters)
-        {
-            emitter.Stop();
-        }
+        var sceneTypeInstances = eventInstances.Where(x=>x.Key == sceneType);
+        var sceneTypeEmitters = eventEmitters.Where(x => x.Key == sceneType);
+
+        //TODO - cleanup
+        //foreach (var eventInstance in sceneTypeInstances)
+        //{
+        //    eventInstance.Value.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //    eventInstance.Value.release();
+        //}
+        //foreach (var eventEmitter in sceneTypeEmitters)
+        //{
+        //    eventEmitter.Value.Stop();
+        //}
     }
 }
