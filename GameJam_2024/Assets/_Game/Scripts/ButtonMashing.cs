@@ -8,7 +8,6 @@ public class ButtonMashing : MonoBehaviour
     public static Action OnMashingFailed;
     public static Action OnMashingSuccessful;
 
-    public Canvas canvas;
     public KeyCode keyCode;
     public float mashDelay = 0.5f;
     public float requiredTimes = 10;
@@ -53,22 +52,24 @@ public class ButtonMashing : MonoBehaviour
         }
     }
 
-    private void StartMashing()
+    public void StartMashing()
     {
-        IEnumerator coroutine = WaitAndStart(2.0f);
+        IEnumerator coroutine = WaitAndStart(1f);
         StartCoroutine(coroutine);
     }
 
-    private void StopMashing()
+    public void StopMashing()
     {
+        count = 0;
         started = false;
-        canvas.gameObject.SetActive(false);
+        Debug.Log("Mashing stopped!");
     }
 
     private IEnumerator WaitAndStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         started = true;
-        canvas.gameObject.SetActive(true);
+        // TODO - Inform player
+        Debug.Log("Mashing started!");
     }
 }

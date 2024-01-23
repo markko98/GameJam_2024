@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RagdollToAnimated : MonoBehaviour
 {
+    public ButtonMashing buttonMashing;
     public Collider collider;
     public float respawnTime = 30f;
 
@@ -21,6 +23,10 @@ public class RagdollToAnimated : MonoBehaviour
 
     void Start()
     {
+        ButtonMashing.OnMashingSuccessful += GetBackUp;
+        ButtonMashing.OnMashingFailed += GetBackUpWithTimer;
+
+
         rigibodies = GetComponentsInChildren<Rigidbody>();
         animator = GetComponent<Animator>();
 
@@ -41,12 +47,22 @@ public class RagdollToAnimated : MonoBehaviour
     public void LaunchPlayer()
     {
         ToggleRagdoll(false);
-        StartCoroutine(GetBackUp());
+        buttonMashing.StartMashing();
     }
 
-    private IEnumerator GetBackUp()
+    private void GetBackUpWithTimer()
     {
-        yield return new WaitForSeconds(respawnTime);
+        StartCoroutine(GetBackUp(respawnTime));
+    }
+
+    private void GetBackUp()
+    {
+        ToggleRagdoll(true, true);
+    }
+
+    private IEnumerator GetBackUp(float time)
+    {
+        yield return new WaitForSeconds(time);
         ToggleRagdoll(true, true);
     }
 
