@@ -46,7 +46,7 @@ public class GameProgressTracker : MonoBehaviour
     }
     private void Update()
     {
-        DecreaseTime(Time.deltaTime);
+        DecreaseTime(GameTicker.DeltaTime);
     }
     private void UpdateView()
     {

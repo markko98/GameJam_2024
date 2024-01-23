@@ -14,6 +14,8 @@ public class GameplayController : USceneController
 
     private ObjectiveController objectiveController = new ObjectiveController();
 
+    private bool pauseMenuCalled;
+
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
@@ -29,6 +31,17 @@ public class GameplayController : USceneController
         
         SetupSound();
         SetUIElements();
+
+        GameTicker.SharedInstance.Update += Update;
+    }
+
+    private void Update()
+    {
+        if (pauseMenuCalled || !Input.GetKeyDown(KeyCode.Escape)) return;
+        
+        pauseMenuCalled = true;
+        var pauseMenuController = new PauseMenuController();
+        AddChildSceneController(pauseMenuController);
     }
 
     public void OnObjectiveComplete(ObjectiveType type)
@@ -50,7 +63,7 @@ public class GameplayController : USceneController
                 timeRemaining = outlet.gameProgressTracker.CurrentTime
             };
             var endGameController = new EndGameController(endGameDetails);
-            PushSceneController(endGameController);
+            AddChildSceneController(endGameController);
             return;
         }
 
@@ -101,5 +114,7 @@ public class GameplayController : USceneController
         Collectable.Collected -= OnObjectiveComplete;
         outlet.goalTrigger.GoalReached -= OnGoalTriggerReached;
         outlet.gameProgressTracker.OnTimeRunOut -= OnTimerRanOut;
+        GameTicker.SharedInstance.Update -= Update;
+
     }
 }
