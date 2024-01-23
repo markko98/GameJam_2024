@@ -23,8 +23,8 @@ public class RagdollToAnimated : MonoBehaviour
 
     void Start()
     {
-        ButtonMashing.OnMashingSuccessful += GetBackUp;
-        ButtonMashing.OnMashingFailed += GetBackUpWithTimer;
+        GameEvent.EventSuccessfull += GetBackUp;
+        GameEvent.EventFailed += GetBackUpWithTimer;
 
 
         rigibodies = GetComponentsInChildren<Rigidbody>();

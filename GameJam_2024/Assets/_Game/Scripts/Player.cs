@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     {
         Boss.OnBossTalking += LookAtBoss;
         Boss.OnBossFainted += StopLookingAtBoss;
-        MatchTextByTyping.OnTextTypedCorrectly += StopLookingAtBoss;
     }
 
     // Update is called once per frame
