@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameplayOutlet : SceneControllerOutlet
 {
     public GameProgressTracker gameProgressTracker;
-    public ObjectiveController objectiveController;
+    public Transform objectiveHolder;
+    public GoalTrigger goalTrigger;
+    public Player playerRef;
+    public Boss bossRef;
 }

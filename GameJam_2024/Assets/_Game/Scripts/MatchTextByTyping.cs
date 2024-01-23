@@ -3,16 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MatchTextByTyping : MonoBehaviour
+public class MatchTextByTyping : GameEvent
 {
-    public static Action OnTextTypedCorrectly;
-    public static Action OnTextTypedIncorrectly;
-
     private int position = 0;
     public string expectedText;
     public float maxTime = 3;
 
-    public Canvas canvas;
     public bool isTyping;
 
     private void Start()
@@ -52,7 +48,7 @@ public class MatchTextByTyping : MonoBehaviour
                 // TODO
                 Debug.Log("Time is up!");
                 StopTyping();
-                OnTextTypedIncorrectly?.Invoke();
+                EventSuccessfull?.Invoke();
             }
         }
     }
@@ -69,7 +65,7 @@ public class MatchTextByTyping : MonoBehaviour
             {
                 isTyping = false;
                 StopTyping();
-                OnTextTypedCorrectly?.Invoke();
+                EventFailed?.Invoke();
             }
 
         }
@@ -81,7 +77,7 @@ public class MatchTextByTyping : MonoBehaviour
             // TODO
             Debug.Log("Wrong Key!");
 
-            OnTextTypedIncorrectly?.Invoke();
+            EventFailed?.Invoke();
         }
     }
 }
