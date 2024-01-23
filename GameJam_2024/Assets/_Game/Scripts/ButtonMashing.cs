@@ -38,12 +38,14 @@ public class ButtonMashing : GameEvent
             {
                 StopMashing();
                 EventSuccessfull?.Invoke();
+                Debug.Log("Mashing successful!");
             }
 
             if (mash <= 0)
             {
                 StopMashing();
                 EventFailed?.Invoke();
+                Debug.Log("Mashing failed!");
             }
         }
     }
@@ -57,12 +59,15 @@ public class ButtonMashing : GameEvent
     public void StopMashing()
     {
         count = 0;
+        mash = mashDelay;
         started = false;
+        canvas.gameObject.SetActive(false);
         Debug.Log("Mashing stopped!");
     }
 
     private IEnumerator WaitAndStart(float waitTime)
     {
+        canvas.gameObject.SetActive(true);
         yield return new WaitForSeconds(waitTime);
         started = true;
         // TODO - Inform player

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private float turnSpeed = 20f;
 
     private Action AnimationDone;
-    
+
     public static Action OnFart;
     public static Action OnFartEnd;
 
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public Transform playerArmature;
     public bool shouldLook = false;
 
-    private EventType currentEvent;
+    public EventType currentEvent;
 
     void Start()
     {
@@ -40,13 +40,12 @@ public class Player : MonoBehaviour
         characterController.detectCollisions = true;
 
         ToggleRagdoll(true);
-        
+
         Boss.OnBossTalking += LookAtBoss;
         Boss.OnBossFainted += StopLookingAtBoss;
-        
-        RegisterEvent(EventType.ButtonMash);
+
     }
-    
+
     void Update()
     {
         if (shouldLook)
@@ -56,9 +55,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Fart();
+            StartFarting();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             LaunchPlayer();
@@ -66,7 +65,7 @@ public class Player : MonoBehaviour
 
         if (animator.IsAnimationPlaying("Get Up")) return;
         if (AnimationDone == null) return;
-        
+
         AnimationDone.Invoke();
         AnimationDone = null;
     }
@@ -83,6 +82,7 @@ public class Player : MonoBehaviour
     {
         ToggleRagdoll(false);
         buttonMashing.StartMashing();
+        RegisterEvent(EventType.ButtonMash);
     }
 
     private void GetBackUpWithTimer()
@@ -93,12 +93,14 @@ public class Player : MonoBehaviour
     private void GetBackUp()
     {
         ToggleRagdoll(true, true);
+        DeregisterEvent(EventType.ButtonMash);
     }
 
     private IEnumerator GetBackUp(float time)
     {
         yield return new WaitForSeconds(time);
         ToggleRagdoll(true, true);
+        DeregisterEvent(EventType.ButtonMash);
     }
 
     private void ToggleRagdoll(bool isAnimating, bool getUp = false)
@@ -125,7 +127,7 @@ public class Player : MonoBehaviour
         isRagdoll = false;
     }
 
-    public void Fart()
+    public void StartFarting()
     {
         // TODO
         Debug.Log("Fart Sound!");
@@ -133,55 +135,66 @@ public class Player : MonoBehaviour
         fart.Play();
         ParticleSystem.EmissionModule em = fart.emission;
         em.enabled = true;
-        
-        DeregisterEvent(currentEvent);
+
+        DeregisterEvent(EventType.MatchText);
     }
 
     public void LookAtBoss()
     {
+        Debug.Log("LookAtBoss");
         shouldLook = true;
     }
 
     public void StopLookingAtBoss()
     {
+        Debug.Log("StopLookingAtBoss");
         shouldLook = false;
         OnFartEnd?.Invoke();
-        
-        DeregisterEvent(currentEvent);
+
+        DeregisterEvent(EventType.MatchText);
     }
-    
+
     private IEnumerator WaitAndFart()
     {
         yield return new WaitForSeconds(3f);
-        Fart();
+        StartFarting();
+    }
+
+    private void Fart()
+    {
+        StartCoroutine(WaitAndFart());
     }
 
     public void RegisterEvent(EventType type)
     {
         currentEvent = type;
+        Debug.Log("Player Register " + type);
         switch (type)
         {
             case EventType.MatchText:
+                Debug.Log("MatchText event is registered!");
                 GameEvent.EventSuccessfull += StopLookingAtBoss;
-                GameEvent.EventFailed += () => StartCoroutine(WaitAndFart());
+                GameEvent.EventFailed += Fart;
                 break;
             case EventType.ButtonMash:
+                Debug.Log("ButtonMash event is registered!");
                 GameEvent.EventSuccessfull += GetBackUp;
                 GameEvent.EventFailed += GetBackUpWithTimer;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-        
+
     }
 
     public void DeregisterEvent(EventType type)
     {
+        Debug.Log("Player DeRegister " + type);
         switch (type)
         {
             case EventType.MatchText:
                 GameEvent.EventSuccessfull -= StopLookingAtBoss;
-                GameEvent.EventFailed -= () => StartCoroutine(WaitAndFart());
+                GameEvent.EventFailed -= Fart;
                 break;
             case EventType.ButtonMash:
                 GameEvent.EventSuccessfull -= GetBackUp;

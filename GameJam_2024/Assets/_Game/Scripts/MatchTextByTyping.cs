@@ -14,7 +14,6 @@ public class MatchTextByTyping : GameEvent
     private void Start()
     {
         Boss.OnBossTalking += StartTyping;
-        Boss.OnBossFainted += StopTyping;
     }
 
     void StartTyping()
@@ -24,8 +23,8 @@ public class MatchTextByTyping : GameEvent
 
     IEnumerator WaitAndStart()
     {
-
         yield return new WaitForSeconds(1);
+        Debug.Log("Start Typing!");
         canvas.gameObject.SetActive(true);
         Keyboard.current.onTextInput += OnTextInput;
         isTyping = true;
@@ -33,6 +32,7 @@ public class MatchTextByTyping : GameEvent
 
     void StopTyping()
     {
+        Debug.Log("Stop Typing!");
         canvas.gameObject.SetActive(false);
         Keyboard.current.onTextInput -= OnTextInput;
         isTyping = false;
@@ -45,10 +45,10 @@ public class MatchTextByTyping : GameEvent
             maxTime -= Time.deltaTime;
             if (maxTime < 0)
             {
-                // TODO
+                // TODO - inform player
                 Debug.Log("Time is up!");
                 StopTyping();
-                EventSuccessfull?.Invoke();
+                EventFailed?.Invoke();
             }
         }
     }
@@ -63,17 +63,16 @@ public class MatchTextByTyping : GameEvent
             ++position;
             if (position == expectedText.Length)
             {
-                isTyping = false;
                 StopTyping();
-                EventFailed?.Invoke();
+                EventSuccessfull?.Invoke();
+                Debug.Log("You wrote correctly");
             }
-
         }
         else
         {
             expectedText = null;
             position = 0;
-            isTyping = false;
+            StopTyping();
             // TODO
             Debug.Log("Wrong Key!");
 

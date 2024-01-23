@@ -17,11 +17,13 @@ public class Boss : MonoBehaviour
     public bool isTalking = false;
     public bool canInteract = true;
 
+    private Player player;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && canInteract)
         {
-            var player = other.gameObject.GetComponent<Player>();
+            player = other.gameObject.GetComponent<Player>();
             player.RegisterEvent(eventType);
             StartTalking();
         }
@@ -29,21 +31,19 @@ public class Boss : MonoBehaviour
 
     public void StartTalking()
     {
-        RegisterEvent(eventType);
         isTalking = true;
         virtualCamera.gameObject.SetActive(true);
         animator.SetBool("isTalking", isTalking);
         OnBossTalking?.Invoke();
+        RegisterEvent(eventType);
     }
 
     public void StopTalking()
     {
-        DeregisterEvent(eventType);
         isTalking = false;
         animator.SetBool("isTalking", isTalking);
         virtualCamera.gameObject.SetActive(false);
         canInteract = false;
-        
         DeregisterEvent(eventType);
     }
 
@@ -53,7 +53,7 @@ public class Boss : MonoBehaviour
         OnBossFainted?.Invoke();
         StopTalking();
     }
-    
+
     private IEnumerator WaitAndFaint()
     {
         yield return new WaitForSeconds(5f);
@@ -62,6 +62,8 @@ public class Boss : MonoBehaviour
 
     public void RegisterEvent(EventType type)
     {
+        Debug.Log("Boss Register " + type);
+
         switch (type)
         {
             case EventType.MatchText:
@@ -73,13 +75,12 @@ public class Boss : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-        
-
     }
 
     public void DeregisterEvent(EventType type)
     {
-        
+        Debug.Log("Boss DeRegister " + type);
+
         switch (type)
         {
             case EventType.MatchText:
@@ -91,6 +92,6 @@ public class Boss : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
-        
+
     }
 }

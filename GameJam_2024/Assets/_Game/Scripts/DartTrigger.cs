@@ -14,8 +14,14 @@ public class DartTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             canSlip = false;
-            other.gameObject.GetComponent<Player>().LaunchPlayer();
-            animator.Play("Throw");
+            animator.SetBool("throw", true);
+            StartCoroutine(WaitAndThrow(other));
         }
+    }
+
+    private IEnumerator WaitAndThrow(Collider other)
+    {
+        yield return new WaitForSeconds(0.5f);
+        other.gameObject.GetComponent<Player>().LaunchPlayer();
     }
 }
