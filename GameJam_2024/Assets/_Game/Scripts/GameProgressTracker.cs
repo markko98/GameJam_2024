@@ -22,7 +22,8 @@ public class GameProgressTracker : MonoBehaviour
                 OnTimeRunOut?.Invoke();
             }
             UpdateView();
-            OnTimeChange?.Invoke(currentTime);
+            OnTimeChange?.Invoke(currentTime, initialTime);
+            OnTimeChangePercentageLeft?.Invoke(1f - (currentTime / initialTime));
         }
 
     }
@@ -38,7 +39,8 @@ public class GameProgressTracker : MonoBehaviour
     bool didGameStart = false;
 
     public Action OnTimeRunOut;
-    public Action<float> OnTimeChange;
+    public Action<float, float> OnTimeChange;
+    public Action<float> OnTimeChangePercentageLeft;
 
     bool didTimeRunOut = false;
 

@@ -67,11 +67,18 @@ MonoBehaviour:
     Path: event:/Ambient/Office
   ventillationAmbient:
     Guid:
-      Data1: -502303847
-      Data2: 1183908541
-      Data3: 204764043
-      Data4: -1699124776
+      Data1: -628309492
+      Data2: 1318097207
+      Data3: 506610053
+      Data4: -1947909536
     Path: event:/Ambient/Ventillation
+  intensityOfficeMusic:
+    Guid:
+      Data1: -1121429620
+      Data2: 1154014582
+      Data3: 80192944
+      Data4: 517528549
+    Path: event:/Music/OfficeGameplay
   stomachSoundLoop:
     Guid:
       Data1: 440634537

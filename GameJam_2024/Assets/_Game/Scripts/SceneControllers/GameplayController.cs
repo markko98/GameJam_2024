@@ -6,7 +6,7 @@ public class GameplayController : USceneController
 {
     public GameplayController() : base(SceneNames.Gameplay) { }
     private GameplayOutlet outlet;
-
+    private EventInstance officeIntensityMusic;
     private EventInstance officeAmbient;
     private EventInstance stomachGrowlLoop;
     private EventInstance stomachGrowl;
@@ -16,6 +16,11 @@ public class GameplayController : USceneController
     string tutorialText = "1.Limber up with a quick office stretch, but not for too long.\r\n\r\n2. Gather essential items on your way. A clever pooper knows what's needed for a successful bathroom mission.\r\n\r\n3. Celebrate with a well-deserved relief!";
 
     private bool pauseMenuCalled;
+    private Vector2 randomFartDelay = new Vector2(3, 8);
+    private float timerFart = 0;
+    private float timeForFart;
+    private float timerGrowl;
+    private float timeForGrowl;
 
     public override void SceneDidLoad()
     {
@@ -40,10 +45,16 @@ public class GameplayController : USceneController
         };
         ModalWindow.Instance.ShowModal(modalData);
 
+        outlet.gameProgressTracker.OnTimeChangePercentageLeft += TimeChangedPercentage;
         outlet.gameProgressTracker.OnTimeRunOut += OnTimerRanOut;
         outlet.goalTrigger.GoalReached += OnGoalTriggerReached;
         
         SetupSound();
+    }
+
+    private void TimeChangedPercentage(float timePercentage)
+    {
+        officeIntensityMusic.setParameterByName("TimeLeft", timePercentage);
     }
 
     private void StartGame()
@@ -51,16 +62,41 @@ public class GameplayController : USceneController
         outlet.gameProgressTracker.Setup();
         SetUIElements();
         outlet.playerController.CanWalk = true;
+        
+        timerFart = 0;
+        timerGrowl = 0;
+        timeForFart = randomFartDelay.GetRandom();
+        timeForGrowl = randomFartDelay.GetRandom();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameTicker.SharedInstance.Update += Update;
+        GameTicker.SharedInstance.Update += TimersUpdate;
+        officeIntensityMusic.start();
+    }
+
+    private void TimersUpdate()
+    {
+        timerFart += GameTicker.DeltaTime;
+        if (timerFart > timeForFart)
+        {
+            timerFart = 0;
+            timeForFart = randomFartDelay.GetRandom();
+            fartSound.start();
+        }
+        timerGrowl += GameTicker.DeltaTime;
+        if (timerGrowl > timeForGrowl)
+        {
+            timerGrowl = 0;
+            timeForGrowl = randomFartDelay.GetRandom();
+            stomachGrowl.start();
+        }
     }
 
     private void Update()
     {
         if (pauseMenuCalled || !Input.GetKeyDown(KeyCode.Escape)) return;
-        
+
         pauseMenuCalled = true;
         var pauseMenuController = new PauseMenuController();
         AddChildSceneController(pauseMenuController);
@@ -116,6 +152,7 @@ public class GameplayController : USceneController
 
     private void SetupSound()
     {
+        officeIntensityMusic = AudioManager.Instance.CreateInstance(AudioProvider.Instance.intensityOfficeMusic, AudioSceneType.Gameplay);
         officeAmbient = AudioManager.Instance.CreateInstance(AudioProvider.Instance.officeAmbient, AudioSceneType.Gameplay);
         stomachGrowlLoop = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSoundLoop, AudioSceneType.Gameplay);
         stomachGrowl = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSound, AudioSceneType.Gameplay);
@@ -137,6 +174,7 @@ public class GameplayController : USceneController
         outlet.goalTrigger.GoalReached -= OnGoalTriggerReached;
         outlet.gameProgressTracker.OnTimeRunOut -= OnTimerRanOut;
         GameTicker.SharedInstance.Update -= Update;
+        GameTicker.SharedInstance.Update -= TimersUpdate;
 
     }
 }
