@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="Mixer" id="{411fe68a-aba8-4b19-a5b0-9112fdd9546c}" />
+	<object class="MasterAssetFolder" id="{e7af4cd9-f9fc-43e9-8620-5ddab1143870}" />
 </objects>

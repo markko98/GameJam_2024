@@ -5,31 +5,31 @@
 			<value>../../GameJam_2024/FMOD_Build</value>
 		</property>
 		<relationship name="masterEventFolder">
-			<destination>{f51f78a1-b1ed-4780-8002-6d97f586567b}</destination>
+			<destination>{0325a392-a091-4203-936e-023061c58c69}</destination>
 		</relationship>
 		<relationship name="masterTagFolder">
-			<destination>{df716243-e3cf-4594-9ba1-77a3656cd987}</destination>
+			<destination>{c71f8e57-d5b3-48ed-be66-ddf407255a34}</destination>
 		</relationship>
 		<relationship name="masterEffectPresetFolder">
-			<destination>{a8863188-fa28-407e-87bf-a904a7e478da}</destination>
+			<destination>{c07cba09-403e-4cb6-8ff3-fa9dda31368b}</destination>
 		</relationship>
 		<relationship name="masterParameterPresetFolder">
-			<destination>{5eab6085-4084-4714-9e02-69aaac246606}</destination>
+			<destination>{f305251a-d904-4c30-874a-2de89765c8cc}</destination>
 		</relationship>
 		<relationship name="masterBankFolder">
-			<destination>{3d669395-354e-439c-ab1d-fab78cd41a87}</destination>
+			<destination>{5300d792-4b1d-459f-b93c-2e69ca01f84c}</destination>
 		</relationship>
 		<relationship name="masterSandboxFolder">
-			<destination>{8d9e1fbc-89e8-4cd7-8ac7-8580291c443e}</destination>
+			<destination>{b1cc9eb2-9fdb-4b29-b531-e1c3e2eb5740}</destination>
 		</relationship>
 		<relationship name="masterAssetFolder">
-			<destination>{53f80630-bcb7-49e5-9e1d-dc02586da456}</destination>
+			<destination>{e7af4cd9-f9fc-43e9-8620-5ddab1143870}</destination>
 		</relationship>
 		<relationship name="mixer">
-			<destination>{7a299885-05aa-4567-b2f2-820ac3c57af8}</destination>
+			<destination>{411fe68a-aba8-4b19-a5b0-9112fdd9546c}</destination>
 		</relationship>
 		<relationship name="profilerSessionFolder">
-			<destination>{d495067f-5aaf-4ca8-a530-1251578dc568}</destination>
+			<destination>{759272ab-d81b-4676-b924-0929a8c3571f}</destination>
 		</relationship>
 		<relationship name="platforms">
 			<destination>{4ff6e35a-38a1-4bb0-8e3b-2b7df5cfbe09}</destination>

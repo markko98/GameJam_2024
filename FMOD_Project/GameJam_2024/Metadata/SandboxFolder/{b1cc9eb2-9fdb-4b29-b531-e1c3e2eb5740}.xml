@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="Mixer" id="{411fe68a-aba8-4b19-a5b0-9112fdd9546c}" />
+	<object class="MasterSandboxFolder" id="{b1cc9eb2-9fdb-4b29-b531-e1c3e2eb5740}" />
 </objects>
