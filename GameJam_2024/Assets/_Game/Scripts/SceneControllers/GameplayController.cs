@@ -22,6 +22,9 @@ public class GameplayController : USceneController
 
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
         presenter.HideLoadingScreen();
+
+        outlet.gameProgressTracker.Setup();
+
         SetupSound();
         SetUIElements();
     }

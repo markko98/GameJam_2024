@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,14 @@ public class GameManager : MonoBehaviour
         Collectable.Collected += Collect;
         ButtonMashing.MashingFailed += MashFailed;
         ButtonMashing.MashingSuccessful += MashSuccessful;
+        // TODO - subrscibe to on time run out
+        //GameProgressTracker.OnTimeRunOut += GameOver;
+    }
+
+    private void GameOver()
+    {
+        // TODO - implement shitting
+        Debug.Log("GAME OVER");
     }
 
     // Update is called once per frame
