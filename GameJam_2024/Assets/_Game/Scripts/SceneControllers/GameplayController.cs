@@ -33,7 +33,10 @@ public class GameplayController : USceneController
 
     public void OnObjectiveComplete(ObjectiveType type)
     {
-        objectiveController.CompleteObjective(type);    
+        objectiveController.CompleteObjective(type);
+
+        var addedTime = ObjectiveController.GetTimeAddValueForObjective(type);
+        outlet.gameProgressTracker.AddTime(addedTime);
     }
 
     public void OnGoalTriggerReached()

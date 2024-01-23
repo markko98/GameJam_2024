@@ -37,18 +37,25 @@ public class ObjectiveController
 
     public static string GetDescriptionForObjective(ObjectiveType type)
     {
-        switch (type)
+        return type switch
         {
-            case ObjectiveType.Toilet:
-                return "Get to the toilet before the time runs out!!";
-            case ObjectiveType.ToiletPaper:
-                return "Pick up toilet paper!!";
-            case ObjectiveType.Magazine:
-                return "Take some magazines off the kitchen counter!!";
-            case ObjectiveType.Key:
-                return "The toilet is locked! Get the key from Bob!!";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
-        }
+            ObjectiveType.Toilet => "Get to the toilet before the time runs out!!",
+            ObjectiveType.ToiletPaper => "Pick up toilet paper!!",
+            ObjectiveType.Magazine => "Take some magazines off the kitchen counter!!",
+            ObjectiveType.Key => "The toilet is locked! Get the key from Bob!!",
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
+    }
+
+    public static int GetTimeAddValueForObjective(ObjectiveType type)
+    {
+        return type switch
+        {
+            ObjectiveType.Toilet => 1,
+            ObjectiveType.ToiletPaper => 15,
+            ObjectiveType.Magazine => 5,
+            ObjectiveType.Key => 0,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
     }
 }
