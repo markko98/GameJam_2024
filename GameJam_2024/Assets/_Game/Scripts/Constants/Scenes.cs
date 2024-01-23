@@ -2,6 +2,7 @@
     public static string EntryPoint = "EntryPoint";
     public static string MainMenu = "MainMenu";
     public static string Gameplay = "Gameplay";
+    public static string EndGame = "EndGame";
 }
 
 public struct SceneOutlets
@@ -9,4 +10,5 @@ public struct SceneOutlets
     public static string EntryPoint = "EntryPointOutlet";
     public static string MainMenu = "MainMenuOutlet";
     public static string Gameplay = "GameplayOutlet";
+    public static string EndGameOutlet = "EndGameOutlet";
 }
