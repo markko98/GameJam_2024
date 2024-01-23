@@ -1,20 +1,20 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public enum ObjectiveType { Toilet, ToiletPaper, Magazine, Key }
-public class ObjectiveController : MonoBehaviour
+
+public class ObjectiveController
 {
-    [SerializeField] ObjectiveView objectivePrefab;
-    [SerializeField] Transform objectiveHolder;
+    private GameObject objectivePrefab;
+    private readonly Dictionary<ObjectiveType, ObjectiveView> objectives = new Dictionary<ObjectiveType, ObjectiveView>();
 
-    Dictionary<ObjectiveType, ObjectiveView> objectives = new Dictionary<ObjectiveType, ObjectiveView>();
-
-    public void CreateObjective(ObjectiveType objectiveType, string objectiveDescription)
+    public void CreateObjective(ObjectiveType objectiveType, Transform parent)
     {
-        var objective = Instantiate(objectivePrefab, objectiveHolder);
-        objective.Setup(objectiveDescription);
+        objectivePrefab = Resources.Load<GameObject>(Strings.UIPath + "Objective");
+        var objective = GameObject.Instantiate(objectivePrefab, parent).GetComponent<ObjectiveView>();
+        objective.Setup(GetDescriptionForObjective(objectiveType));
         objectives.Add(objectiveType, objective);
     }
 
@@ -27,6 +27,28 @@ public class ObjectiveController : MonoBehaviour
         else
         {
             Debug.LogWarning("No objective of type " + objectiveType.ToString());
+        }
+    }
+
+    public bool CanFinishGame()
+    {
+        return objectives.All(objective  => objective.Value.isCompleted);
+    }
+
+    public static string GetDescriptionForObjective(ObjectiveType type)
+    {
+        switch (type)
+        {
+            case ObjectiveType.Toilet:
+                return "Get to the toilet before the time runs out!!";
+            case ObjectiveType.ToiletPaper:
+                return "Pick up toilet paper!!";
+            case ObjectiveType.Magazine:
+                return "Take some magazines off the kitchen counter!!";
+            case ObjectiveType.Key:
+                return "The toilet is locked! Get the key from Bob!!";
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
 }

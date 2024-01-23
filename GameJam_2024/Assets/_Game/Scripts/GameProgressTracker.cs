@@ -35,8 +35,8 @@ public class GameProgressTracker : MonoBehaviour
     [SerializeField] Color fullColor;
     [SerializeField] Color emptyColor;
 
-    public static System.Action OnTimeRunOut;
-    public static System.Action<float> OnTimeChange;
+    public Action OnTimeRunOut;
+    public Action<float> OnTimeChange;
 
     bool didTimeRunOut = false;
 

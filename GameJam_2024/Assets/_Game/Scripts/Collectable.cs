@@ -3,29 +3,31 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-    public string type;
+    public ObjectiveType type;
+    public static Action<ObjectiveType> Collected;
 
-    public Canvas canvas;
-
-    public static Action<string> Collected;
-
-    bool isTriggered = false;
+    private Canvas canvas;
+    private bool isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            canvas.gameObject.SetActive(true);
-            isTriggered = true;
-        }
+        if (!other.CompareTag("Player")) return;
+        
+        canvas.gameObject.SetActive(true);
+        isTriggered = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        canvas.gameObject.SetActive(false);
+        isTriggered = false;
     }
 
     private void Update()
     {
-        if (isTriggered && Input.GetKeyDown(KeyCode.E))
-        {
-            Collected?.Invoke(type);
-            Destroy(this.gameObject);
-        }
+        if (!isTriggered || !Input.GetKeyDown(KeyCode.E)) return;
+        
+        Collected?.Invoke(type);
+        Destroy(this.gameObject);
     }
 }
