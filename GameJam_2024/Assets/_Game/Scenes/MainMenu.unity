@@ -282,7 +282,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Reminder: \nDon't shit yourself again!"
+  m_text: '<b>Reminder:</b>
+
+    Don''t shit yourself again!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8cc19a1d9008a4d44b33583ed5f61ca7, type: 2}
   m_sharedMaterial: {fileID: 744783504517068800, guid: 8cc19a1d9008a4d44b33583ed5f61ca7,
@@ -647,7 +649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BRING THE TOILET PAPER!!!
+  m_text: BRING THE TOILET PAPER<b>!!!</b>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8cc19a1d9008a4d44b33583ed5f61ca7, type: 2}
   m_sharedMaterial: {fileID: 744783504517068800, guid: 8cc19a1d9008a4d44b33583ed5f61ca7,
@@ -1609,10 +1611,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Poop Tip of the day
+  m_text: '<b>Poop Tip of the day</b>
 
-    Embrace the vertical challenge! Standing is not
-    just for meetings, it''s for building those epic leg muscles.'
+    Embrace the vertical challenge! Standing
+    is not just for meetings, it''s for building those epic leg muscles.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8cc19a1d9008a4d44b33583ed5f61ca7, type: 2}
   m_sharedMaterial: {fileID: 744783504517068800, guid: 8cc19a1d9008a4d44b33583ed5f61ca7,
