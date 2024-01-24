@@ -182,6 +182,7 @@ public class Player : MonoBehaviour
 
     public void Shit()
     {
+        thirdPersonController.CanWalk = false;
         StartCoroutine(WaitAndShit());
     }
 
