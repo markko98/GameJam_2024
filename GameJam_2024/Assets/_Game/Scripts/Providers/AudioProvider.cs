@@ -29,6 +29,11 @@ public class AudioProvider : MonoBehaviour
     public FMODUnity.EventReference fail;
     public FMODUnity.EventReference doorSlap;
     public FMODUnity.EventReference winToilet;
+    
+    public FMODUnity.EventReference mashSuccess;
+    public FMODUnity.EventReference mashFail;
+    public FMODUnity.EventReference keystroke;
+
 
     [Header("UI")]
     public FMODUnity.EventReference hoverUI;

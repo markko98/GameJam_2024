@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using FMOD.Studio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,10 +17,18 @@ public class MatchTextByTyping : GameEvent
     public string writtenText = "";
 
     public Transform ourTarget;
+    
+    private EventInstance mashSuccess;
+    private EventInstance mashFail;
+    private EventInstance keystroke;
+
 
     private void Start()
     {
         Boss.OnBossTalking += StartTyping;
+        mashSuccess = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mashSuccess, AudioSceneType.Gameplay);
+        mashFail = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mashFail, AudioSceneType.Gameplay);
+        keystroke = AudioManager.Instance.CreateInstance(AudioProvider.Instance.keystroke, AudioSceneType.Gameplay);
     }
 
     void StartTyping(Transform target)
@@ -62,6 +71,7 @@ public class MatchTextByTyping : GameEvent
                 Debug.Log("Time is up!");
                 text.text = "You could not avoid the colleague!";
                 StopTyping();
+                mashFail.start();
                 EventFailed?.Invoke();
             }
         }
@@ -71,6 +81,8 @@ public class MatchTextByTyping : GameEvent
     {
         if (expectedText == null || position >= expectedText.Length)
             return;
+
+        keystroke.start();
 
         if (expectedText[position] == ch)
         {
@@ -82,6 +94,7 @@ public class MatchTextByTyping : GameEvent
                 text.text = "You avoided the colleague!";
                 StopTyping();
                 EventSuccessfull?.Invoke();
+                mashSuccess.start();
                 Debug.Log("You wrote correctly");
             }
         }
@@ -93,6 +106,7 @@ public class MatchTextByTyping : GameEvent
             StopTyping();
             // TODO
             Debug.Log("Wrong Key!");
+            mashFail.start();
             EventFailed?.Invoke();
         }
     }

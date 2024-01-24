@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using FMOD.Studio;
 using UnityEngine;
 
 public class ButtonMashing : GameEvent
@@ -13,8 +14,14 @@ public class ButtonMashing : GameEvent
     bool started = false;
     public int count;
 
+    private EventInstance mashSuccess;
+    private EventInstance mashFail;
+
     void Start()
     {
+        mashSuccess = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mashSuccess, AudioSceneType.Gameplay);
+        mashFail = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mashFail, AudioSceneType.Gameplay);
+
         mash = mashDelay;
     }
 
@@ -38,6 +45,7 @@ public class ButtonMashing : GameEvent
             {
                 StopMashing();
                 EventSuccessfull?.Invoke();
+                mashSuccess.start();
                 Debug.Log("Mashing successful!");
             }
 
@@ -45,6 +53,7 @@ public class ButtonMashing : GameEvent
             {
                 StopMashing();
                 EventFailed?.Invoke();
+                mashFail.start();
                 Debug.Log("Mashing failed!");
             }
         }
