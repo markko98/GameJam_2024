@@ -171,8 +171,8 @@ public class GameplayController : USceneController
         stomachGrowl = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSound, AudioSceneType.Gameplay);
         fartSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fartSound, AudioSceneType.Gameplay);
 
-        winSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.winToilet, AudioSceneType.Gameplay);
-        failSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fail, AudioSceneType.Gameplay);
+        winSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.winToilet, AudioSceneType.Global);
+        failSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fail, AudioSceneType.Global);
         clockAmbient =
             AudioManager.Instance.CreateInstance(AudioProvider.Instance.clockTicking, AudioSceneType.Gameplay);
         collectablePickup = AudioManager.Instance.CreateInstance(AudioProvider.Instance.collectablePickup, AudioSceneType.Gameplay);
