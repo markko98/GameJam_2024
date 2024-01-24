@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum ObjectiveType { Toilet, ToiletPaper, Magazine, Key }
+public enum ObjectiveType { Toilet, ToiletPaper, Magazine, Phone}
 
 public class ObjectiveController
 {
@@ -42,7 +42,7 @@ public class ObjectiveController
             ObjectiveType.Toilet => "Get to the toilet before the time runs out!!",
             ObjectiveType.ToiletPaper => "Pick up toilet paper!!",
             ObjectiveType.Magazine => "Take some magazines off the kitchen counter!!",
-            ObjectiveType.Key => "The toilet is locked! Get the key from Bob!!",
+            ObjectiveType.Phone => "Take the phone from your office, what are you going to do? Read magazines? We are not in THAT kind of hurry.",
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }
@@ -51,10 +51,10 @@ public class ObjectiveController
     {
         return type switch
         {
-            ObjectiveType.Toilet => 1,
+            ObjectiveType.Toilet => 0,
             ObjectiveType.ToiletPaper => 15,
             ObjectiveType.Magazine => 5,
-            ObjectiveType.Key => 0,
+            ObjectiveType.Phone => 8,
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }
