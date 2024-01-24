@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public bool shouldLook = false;
 
     public EventType currentEvent;
-    public ThirdPersonController thirdPersonController;
+    private ThirdPersonController thirdPersonController;
 
     void Start()
     {
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
         Boss.OnBossTalking += LookAtBoss;
         Boss.OnBossFainted += StopLookingAtBoss;
-
+        thirdPersonController = GetComponent<ThirdPersonController>();
     }
 
     void Update()

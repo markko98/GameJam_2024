@@ -9,6 +9,11 @@ public class Collectable : MonoBehaviour
     [SerializeField] private Canvas canvas;
     private bool isTriggered = false;
 
+    private void Awake()
+    {
+        canvas = GetComponentInChildren<Canvas>(true);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;

@@ -22,6 +22,8 @@ public class GameplayController : USceneController
     private float timerGrowl;
     private float timeForGrowl;
 
+    private DisposeBag disposeBag = new DisposeBag();
+
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
@@ -115,7 +117,7 @@ public class GameplayController : USceneController
     {
         if (objectiveController.CanFinishGame())
         {
-            // SHow same success screen;
+            objectiveController.CompleteObjective(ObjectiveType.Toilet);
             var endGameDetails = new EndGameDetails()
             {
                 isVictory = true,
@@ -133,14 +135,17 @@ public class GameplayController : USceneController
     public void OnTimerRanOut()
     {
         outlet.playerRef.Shit();
-
-        var endGameDetails = new EndGameDetails()
+        
+        DelayedExecutionManager.ExecuteActionAfterDelay(3000, () =>
         {
-            isVictory = false,
-            timeRemaining = outlet.gameProgressTracker.CurrentTime
-        };
-        var endGameController = new EndGameController(endGameDetails);
-        PushSceneController(endGameController);
+            var endGameDetails = new EndGameDetails()
+            {
+                isVictory = false,
+                timeRemaining = outlet.gameProgressTracker.CurrentTime
+            };
+            var endGameController = new EndGameController(endGameDetails);
+            PushSceneController(endGameController);
+        }).disposeBy(disposeBag);
     }
 
     private void SetupObjectives()
