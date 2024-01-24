@@ -22,6 +22,14 @@ public class Collectable : MonoBehaviour
         isTriggered = true;
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        
+        canvas.gameObject.SetActive(true);
+        isTriggered = true;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         canvas.gameObject.SetActive(false);
