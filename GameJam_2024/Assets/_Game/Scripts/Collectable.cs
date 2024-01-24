@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,17 @@ public class Collectable : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
 
     private bool isTriggered = false;
+
+    private Sequence flashSequence;
+    private Light light;
+    private Color startingColor;
+
+    private void Start()
+    {
+        light = GetComponentInChildren<Light>();
+        startingColor = light.color;
+        DoLightAnimation();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,5 +52,14 @@ public class Collectable : MonoBehaviour
         text.text = "";
         Collected?.Invoke(type);
         Destroy(this.gameObject);
+    }
+
+    private void DoLightAnimation()
+    {
+        flashSequence = DOTween.Sequence();
+        flashSequence
+            .Append(light.DOColor(Color.white, 0.5f))
+            .Append(light.DOColor(startingColor, 0.5f))
+            .OnComplete(DoLightAnimation);
     }
 }
