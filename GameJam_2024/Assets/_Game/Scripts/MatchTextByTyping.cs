@@ -15,13 +15,18 @@ public class MatchTextByTyping : GameEvent
     public TextMeshProUGUI typingText;
     public string writtenText = "";
 
+    public Transform ourTarget;
+
     private void Start()
     {
         Boss.OnBossTalking += StartTyping;
     }
 
-    void StartTyping()
+    void StartTyping(Transform target)
     {
+
+        if (ourTarget != target) return;
+        
         StartCoroutine(WaitAndStart());
     }
 
@@ -29,7 +34,8 @@ public class MatchTextByTyping : GameEvent
     {
         yield return new WaitForSeconds(1);
         Debug.Log("Start Typing!");
-        text.text = "Type " + expectedText + " to avoid boss!";
+        text.text = "Type " + expectedText + " to avoid colleague!";
+        
         Keyboard.current.onTextInput += OnTextInput;
         isTyping = true;
     }
@@ -37,11 +43,12 @@ public class MatchTextByTyping : GameEvent
     void StopTyping()
     {
         Debug.Log("Stop Typing!");
-        text.text = "";
+        
         Keyboard.current.onTextInput -= OnTextInput;
         isTyping = false;
         writtenText = "";
         typingText.text = "";
+        DelayedExecutionManager.ExecuteActionAfterDelay(1000, () => text.text = "");
     }
 
     private void Update()
@@ -53,7 +60,7 @@ public class MatchTextByTyping : GameEvent
             {
                 // TODO - inform player
                 Debug.Log("Time is up!");
-                text.text = "You could not avoid the boss!";
+                text.text = "You could not avoid the colleague!";
                 StopTyping();
                 EventFailed?.Invoke();
             }
@@ -72,7 +79,7 @@ public class MatchTextByTyping : GameEvent
             ++position;
             if (position == expectedText.Length)
             {
-                text.text = "You avoided the boss!";
+                text.text = "You avoided the colleague!";
                 StopTyping();
                 EventSuccessfull?.Invoke();
                 Debug.Log("You wrote correctly");
@@ -80,7 +87,6 @@ public class MatchTextByTyping : GameEvent
         }
         else
         {
-            expectedText = null;
             position = 0;
             text.text = "Wrong key is pressed!";
 

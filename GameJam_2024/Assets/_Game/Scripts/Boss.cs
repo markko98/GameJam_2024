@@ -1,12 +1,11 @@
 using Cinemachine;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public static Action OnBossTalking;
+    public static Action<Transform> OnBossTalking;
     public static Action OnBossFainted;
 
     public CinemachineVirtualCamera virtualCamera;
@@ -24,6 +23,8 @@ public class Boss : MonoBehaviour
         if (other.CompareTag("Player") && canInteract)
         {
             player = other.gameObject.GetComponent<Player>();
+            player.SetBossTarget(animator.transform);
+            animator.transform.LookAt(player.transform);
             player.RegisterEvent(eventType);
             StartTalking();
         }
@@ -34,7 +35,7 @@ public class Boss : MonoBehaviour
         isTalking = true;
         virtualCamera.gameObject.SetActive(true);
         animator.SetBool("isTalking", isTalking);
-        OnBossTalking?.Invoke();
+        OnBossTalking?.Invoke(animator.transform);
         RegisterEvent(eventType);
     }
 

@@ -144,7 +144,12 @@ public class Player : MonoBehaviour
         DeregisterEvent(EventType.MatchText);
     }
 
-    public void LookAtBoss()
+    public void SetBossTarget(Transform boss)
+    {
+        this.boss = boss;
+    }
+
+    public void LookAtBoss(Transform target)
     {
         Debug.Log("LookAtBoss");
         shouldLook = true;
