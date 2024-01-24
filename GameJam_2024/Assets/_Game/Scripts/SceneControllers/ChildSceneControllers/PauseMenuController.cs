@@ -24,7 +24,9 @@ public class PauseMenuController: USceneController
 
     private void SetupUIElements()
     {
-        outlet.warningText.SetText($"DID YOU REALLY PAUSE THE GAME IN TIMES LIKE THIS??? \n FINE I'LL GIVE YOU {0} SECONDS TO REST", maxTime);
+        outlet.warningText
+            .SetText("DID YOU REALLY PAUSE THE GAME IN TIMES LIKE THIS???" +
+                     "\n FINE I'LL GIVE YOU " + Math.Round(maxTime) + " SECONDS TO REST");
         outlet.timeRemainingText.SetText(Math.Round(maxTime).ToString());
     }
 
