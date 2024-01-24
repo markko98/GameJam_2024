@@ -13,6 +13,7 @@ public class EndGameController: USceneController
 
     public override void SceneDidLoad()
     {
+        GameTicker.TimeScale = 0;
         base.SceneDidLoad();
         outlet = GameObject.Find(SceneOutlets.EndGameOutlet).GetComponent<EndGameOutlet>();
 
@@ -31,6 +32,12 @@ public class EndGameController: USceneController
         
         
         outlet.quitButton.onClick.AddListener(UNavigationController.PopToRootViewController);
+    }
+
+    public override void SceneWillDisappear()
+    {
+        base.SceneWillDisappear();
+        GameTicker.TimeScale = 1;
     }
 }
 
