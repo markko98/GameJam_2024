@@ -33,6 +33,9 @@ public class AudioProvider : MonoBehaviour
     public FMODUnity.EventReference mashSuccess;
     public FMODUnity.EventReference mashFail;
     public FMODUnity.EventReference keystroke;
+    public FMODUnity.EventReference doorLocked;
+
+    
 
 
     [Header("UI")]

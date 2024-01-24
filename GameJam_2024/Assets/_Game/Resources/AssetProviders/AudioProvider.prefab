@@ -170,6 +170,27 @@ MonoBehaviour:
       Data3: 854984126
       Data4: -1135873702
     Path: event:/SFX/WinToilet
+  mashSuccess:
+    Guid:
+      Data1: -538233855
+      Data2: 1221705442
+      Data3: 1821672373
+      Data4: -235095533
+    Path: event:/SFX/SucceedMashing
+  mashFail:
+    Guid:
+      Data1: -1387214374
+      Data2: 1138856309
+      Data3: 943221912
+      Data4: 1122798102
+    Path: event:/SFX/FailedMashing
+  keystroke:
+    Guid:
+      Data1: -822213368
+      Data2: 1092917264
+      Data3: 46101417
+      Data4: -1383420044
+    Path: event:/SFX/MashingClicks
   hoverUI:
     Guid:
       Data1: -290793959
