@@ -30,6 +30,8 @@ public class GameplayController : USceneController
 
     private DisposeBag disposeBag = new DisposeBag();
 
+    private bool gameStartedClicked;
+
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
@@ -56,6 +58,9 @@ public class GameplayController : USceneController
 
     private void StartGame()
     {
+        if (gameStartedClicked) return;
+
+        gameStartedClicked = true;
         outlet.gameProgressTracker.Setup();
         SetUIElements();
         outlet.playerController.CanWalk = true;
