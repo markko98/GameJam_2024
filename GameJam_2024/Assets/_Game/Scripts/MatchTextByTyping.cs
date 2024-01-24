@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,9 @@ public class MatchTextByTyping : GameEvent
     public float maxTime = 3;
 
     public bool isTyping;
+
+    public TextMeshProUGUI typingText;
+    public string writtenText = "";
 
     private void Start()
     {
@@ -25,7 +29,7 @@ public class MatchTextByTyping : GameEvent
     {
         yield return new WaitForSeconds(1);
         Debug.Log("Start Typing!");
-        canvas.gameObject.SetActive(true);
+        text.text = "Type " + expectedText + " to avoid boss!";
         Keyboard.current.onTextInput += OnTextInput;
         isTyping = true;
     }
@@ -33,9 +37,11 @@ public class MatchTextByTyping : GameEvent
     void StopTyping()
     {
         Debug.Log("Stop Typing!");
-        canvas.gameObject.SetActive(false);
+        text.text = "";
         Keyboard.current.onTextInput -= OnTextInput;
         isTyping = false;
+        writtenText = "";
+        typingText.text = "";
     }
 
     private void Update()
@@ -47,6 +53,7 @@ public class MatchTextByTyping : GameEvent
             {
                 // TODO - inform player
                 Debug.Log("Time is up!");
+                text.text = "You could not avoid the boss!";
                 StopTyping();
                 EventFailed?.Invoke();
             }
@@ -60,9 +67,12 @@ public class MatchTextByTyping : GameEvent
 
         if (expectedText[position] == ch)
         {
+            writtenText += ch;
+            typingText.text = writtenText;
             ++position;
             if (position == expectedText.Length)
             {
+                text.text = "You avoided the boss!";
                 StopTyping();
                 EventSuccessfull?.Invoke();
                 Debug.Log("You wrote correctly");
@@ -72,10 +82,11 @@ public class MatchTextByTyping : GameEvent
         {
             expectedText = null;
             position = 0;
+            text.text = "Wrong key is pressed!";
+
             StopTyping();
             // TODO
             Debug.Log("Wrong Key!");
-
             EventFailed?.Invoke();
         }
     }

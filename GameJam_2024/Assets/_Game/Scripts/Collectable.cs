@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
@@ -6,40 +7,37 @@ public class Collectable : MonoBehaviour
     public ObjectiveType type;
     public static Action<ObjectiveType> Collected;
 
-    [SerializeField] private Canvas canvas;
-    private bool isTriggered = false;
+    [SerializeField] TextMeshProUGUI text;
 
-    private void Awake()
-    {
-        canvas = GetComponentInChildren<Canvas>(true);
-    }
+    private bool isTriggered = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        
-        canvas.gameObject.SetActive(true);
+
+        text.text = "Press 'E' to take!";
         isTriggered = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        
-        canvas.gameObject.SetActive(true);
+
+        text.text = "Press 'E' to take!";
         isTriggered = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        canvas.gameObject.SetActive(false);
+        text.text = "";
         isTriggered = false;
     }
 
     private void Update()
     {
         if (!isTriggered || !Input.GetKeyDown(KeyCode.E)) return;
-        
+
+        text.text = "";
         Collected?.Invoke(type);
         Destroy(this.gameObject);
     }

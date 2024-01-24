@@ -58,16 +58,18 @@ public class ButtonMashing : GameEvent
 
     public void StopMashing()
     {
+        text.text = "";
+
         count = 0;
         mash = mashDelay;
         started = false;
-        canvas.gameObject.SetActive(false);
         Debug.Log("Mashing stopped!");
     }
 
     private IEnumerator WaitAndStart(float waitTime)
     {
-        canvas.gameObject.SetActive(true);
+        text.text = "Press Q repeatedly to get up quickly!";
+
         yield return new WaitForSeconds(waitTime);
         started = true;
         // TODO - Inform player
