@@ -24,14 +24,14 @@ public class EndGameController: USceneController
 
     private void SetupUIElements()
     {
-        outlet.titleText.SetText(details.isVictory ? "Congratulations" : "You haven't made it in time :(");
+        outlet.titleText.SetText(details.isVictory ? "Congratulations!" : "You haven't made it in time :(");
         
         var seconds = (int)details.timeRemaining % 60;
         var minutes = (int)details.timeRemaining / 60;
-        outlet.timeRemainingText.SetText("Time remaining: " + string.Format("{0:00}:{0:00}", minutes, seconds));
+        outlet.timeRemainingText.SetText($"Time remaining: {minutes:00}:{seconds:00}");
         
         
-        outlet.quitButton.onClick.AddListener(UNavigationController.PopToRootViewController);
+        outlet.quitButton.onClick.AddListener(Application.Quit);
     }
 
     public override void SceneWillDisappear()
