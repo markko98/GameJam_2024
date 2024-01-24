@@ -144,7 +144,7 @@ public class GameplayController : USceneController
                 timeRemaining = outlet.gameProgressTracker.CurrentTime
             };
             var endGameController = new EndGameController(endGameDetails);
-            PushSceneController(endGameController);
+            AddChildSceneController(endGameController);
         }).disposeBy(disposeBag);
     }
 
