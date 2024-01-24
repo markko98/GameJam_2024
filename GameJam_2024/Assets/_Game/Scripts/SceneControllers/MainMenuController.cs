@@ -48,6 +48,7 @@ public class MainMenuController : USceneController
 
     private void OpenGameplayScene()
     {
+        mainMenuMusic.stop(STOP_MODE.ALLOWFADEOUT);
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
         presenter.HideLoadingScreen(animated: false);
         presenter.ShowLoadingScreen(() =>

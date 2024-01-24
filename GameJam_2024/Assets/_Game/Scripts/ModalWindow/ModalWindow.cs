@@ -70,6 +70,7 @@ public class ModalWindow
         var modal = CreateModalWindow();
         currentModal = modal;
         currentModal.Modal.gameObject.SetActive(false);
+        currentModal.Modal_Header_ExitBTN.gameObject.SetActive(false);
         SetHeader(title);
         SetContent(message);
         SetFooter(option1, option2);

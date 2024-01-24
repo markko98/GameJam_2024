@@ -208,7 +208,6 @@ public class GameplayController : USceneController
             option1 = "Okay",
             option2 = "",
             option1Callback = ShowTutorialModal,
-            option2Callback = ShowTutorialModal
         };
         ModalWindow.Instance.ShowModal(modalData);
     }
@@ -224,7 +223,6 @@ public class GameplayController : USceneController
                 option1 = "Okay",
                 option2 = "",
                 option1Callback = StartGame,
-                option2Callback = StartGame
             };
             ModalWindow.Instance.ShowModal(modalData);
         });
