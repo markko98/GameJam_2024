@@ -11,7 +11,7 @@ public class Collectable : MonoBehaviour
 
     private void Awake()
     {
-        canvas = transform.GetComponentInChildren<Canvas>();
+        canvas = GetComponentInChildren<Canvas>(true);
     }
 
     private void OnTriggerEnter(Collider other)
