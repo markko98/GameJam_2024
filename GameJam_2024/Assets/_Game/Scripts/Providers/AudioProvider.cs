@@ -12,6 +12,9 @@ public class AudioProvider : MonoBehaviour
     public FMODUnity.EventReference officeAmbient;
     public FMODUnity.EventReference ventillationAmbient;
 
+    [Header("Gameplay")]
+    public FMODUnity.EventReference intensityOfficeMusic;
+
     [Header("SFX")]
     public FMODUnity.EventReference stomachSoundLoop;
     public FMODUnity.EventReference stomachSound; // couple of them randomly
