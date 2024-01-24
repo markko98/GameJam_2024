@@ -11,6 +11,12 @@ public class GameplayController : USceneController
     private EventInstance stomachGrowlLoop;
     private EventInstance stomachGrowl;
     private EventInstance fartSound;
+    
+    private EventInstance winSound;
+    private EventInstance failSound;
+    private EventInstance clockAmbient;
+    private EventInstance collectablePickup;
+
 
     private ObjectiveController objectiveController = new ObjectiveController();
     string tutorialText = "1.Limber up with a quick office stretch, but not for too long.\r\n\r\n2. Gather essential items on your way. A clever pooper knows what's needed for a successful bathroom mission.\r\n\r\n3. Celebrate with a well-deserved relief!";
@@ -95,6 +101,7 @@ public class GameplayController : USceneController
 
     public void OnObjectiveComplete(ObjectiveType type)
     {
+        collectablePickup.start();
         objectiveController.CompleteObjective(type);
 
         var addedTime = ObjectiveController.GetTimeAddValueForObjective(type);
@@ -111,6 +118,8 @@ public class GameplayController : USceneController
                 isVictory = true,
                 timeRemaining = outlet.gameProgressTracker.CurrentTime
             };
+
+            winSound.start();
             var endGameController = new EndGameController(endGameDetails);
             AddChildSceneController(endGameController);
             return;
@@ -131,6 +140,8 @@ public class GameplayController : USceneController
                 isVictory = false,
                 timeRemaining = outlet.gameProgressTracker.CurrentTime
             };
+
+            failSound.start();
             var endGameController = new EndGameController(endGameDetails);
             AddChildSceneController(endGameController);
         }).disposeBy(disposeBag);
@@ -154,7 +165,15 @@ public class GameplayController : USceneController
         stomachGrowl = AudioManager.Instance.CreateInstance(AudioProvider.Instance.stomachSound, AudioSceneType.Gameplay);
         fartSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fartSound, AudioSceneType.Gameplay);
 
+        winSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.winToilet, AudioSceneType.Gameplay);
+        failSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fail, AudioSceneType.Gameplay);
+        clockAmbient =
+            AudioManager.Instance.CreateInstance(AudioProvider.Instance.clockTicking, AudioSceneType.Gameplay);
+        collectablePickup = AudioManager.Instance.CreateInstance(AudioProvider.Instance.collectablePickup, AudioSceneType.Gameplay);
+
+
         officeAmbient.start();
+        clockAmbient.start();
         stomachGrowlLoop.start();
     }
 

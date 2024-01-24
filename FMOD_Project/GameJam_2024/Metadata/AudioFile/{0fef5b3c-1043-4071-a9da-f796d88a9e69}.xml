@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0fef5b3c-1043-4071-a9da-f796d88a9e69}">
+		<property name="assetPath">
+			<value>SFX/jazz-loop-7163.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>62.375999999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e7af4cd9-f9fc-43e9-8620-5ddab1143870}</destination>
+		</relationship>
+	</object>
+</objects>

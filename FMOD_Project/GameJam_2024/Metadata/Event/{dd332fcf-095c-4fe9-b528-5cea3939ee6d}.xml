@@ -5,7 +5,7 @@
 			<value>FallRagdoll</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{91e6e669-d780-4f25-a4a7-9c265af3df97}</destination>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{f8d59e0c-bbb6-454e-aa6e-b52f179040f2}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{5fd55503-2327-4e08-b36e-0af76c6ed873}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{b09eb083-aa83-4e44-898a-a795930d4a58}">
@@ -79,7 +82,11 @@
 			<destination>{b09eb083-aa83-4e44-898a-a795930d4a58}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{2e1b96e4-3dee-4e35-b5d1-7d97be8fd509}" />
+	<object class="MultiSound" id="{2e1b96e4-3dee-4e35-b5d1-7d97be8fd509}">
+		<relationship name="sounds">
+			<destination>{da94083e-75b1-42a3-8c61-192bcf17540f}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{edda173b-4a7b-490a-8dfe-7868321a3a3d}">
 		<relationship name="effects">
 			<destination>{4a47ee8a-d380-4aed-83a2-7658f4158487}</destination>
@@ -92,6 +99,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c4804d19-7180-454d-8b9c-1958039aadc0}" />
+	<object class="SingleSound" id="{da94083e-75b1-42a3-8c61-192bcf17540f}">
+		<relationship name="audioFile">
+			<destination>{d504fa2f-f738-460b-9b63-1e377f150347}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{4a47ee8a-d380-4aed-83a2-7658f4158487}" />
 	<object class="MixerBusFader" id="{3471f523-014a-4a66-a907-40edb8685bf2}" />
 </objects>

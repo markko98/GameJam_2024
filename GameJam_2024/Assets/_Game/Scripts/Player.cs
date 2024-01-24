@@ -2,6 +2,7 @@ using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -36,8 +37,18 @@ public class Player : MonoBehaviour
     public EventType currentEvent;
     private ThirdPersonController thirdPersonController;
 
+    private EventInstance fartSound;
+    private EventInstance shitSound;
+    private EventInstance fallSound;
+
+
     void Start()
     {
+        fartSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fartSound, AudioSceneType.Gameplay);
+        shitSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fartSoundHuge, AudioSceneType.Gameplay);
+        fallSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.fall, AudioSceneType.Gameplay);
+
+
         rigibodies = GetComponentsInChildren<Rigidbody>();
         animator = GetComponent<Animator>();
 
@@ -85,6 +96,7 @@ public class Player : MonoBehaviour
 
     public void LaunchPlayer()
     {
+        fallSound.start();
         ToggleRagdoll(false);
         buttonMashing.StartMashing();
         RegisterEvent(EventType.ButtonMash);
@@ -134,8 +146,7 @@ public class Player : MonoBehaviour
 
     public void StartFarting()
     {
-        // TODO
-        Debug.Log("Fart Sound!");
+        fartSound.start();
         OnFart?.Invoke();
         fart.Play();
         ParticleSystem.EmissionModule em = fart.emission;
@@ -182,6 +193,7 @@ public class Player : MonoBehaviour
 
     public void Shit()
     {
+        thirdPersonController.CanWalk = false;
         StartCoroutine(WaitAndShit());
     }
 
@@ -190,9 +202,7 @@ public class Player : MonoBehaviour
         animator.SetBool("Shitting", true);
         GetComponent<BoxCollider>().enabled = false;
         yield return new WaitForSeconds(1.5f);
-        // TODO - Game Over
-        // TODO - Sound
-        Debug.Log("Shit Sound!");
+        shitSound.start();
         shit.Play();
         ParticleSystem.EmissionModule em = shit.emission;
         em.enabled = true;

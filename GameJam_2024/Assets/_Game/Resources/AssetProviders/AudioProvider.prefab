@@ -72,6 +72,13 @@ MonoBehaviour:
       Data3: 506610053
       Data4: -1947909536
     Path: event:/Ambient/Ventillation
+  clockTicking:
+    Guid:
+      Data1: 1900326724
+      Data2: 1106170462
+      Data3: 2132095371
+      Data4: 328618275
+    Path: event:/Ambient/ClockTicking
   intensityOfficeMusic:
     Guid:
       Data1: -1121429620
@@ -107,6 +114,69 @@ MonoBehaviour:
       Data3: -161422973
       Data4: 124268467
     Path: event:/SFX/HugeFart
+  bossTalking:
+    Guid:
+      Data1: -574757484
+      Data2: 1079453036
+      Data3: -1027153496
+      Data4: -778539136
+    Path: event:/SFX/BossTalking
+  clapping:
+    Guid:
+      Data1: 1829116969
+      Data2: 1118107438
+      Data3: -1250948469
+      Data4: 877952802
+    Path: event:/SFX/Clapping
+  collectablePickup:
+    Guid:
+      Data1: 1370391086
+      Data2: 1179828009
+      Data3: -315199608
+      Data4: 419508425
+    Path: event:/SFX/CollectablePickup
+  fall:
+    Guid:
+      Data1: -583847985
+      Data2: 1340672348
+      Data3: -363059019
+      Data4: 1844328761
+    Path: event:/SFX/FallRagdoll
+  girlShitDude:
+    Guid:
+      Data1: -954305243
+      Data2: 1280506653
+      Data3: -1408468801
+      Data4: -1560724372
+    Path: event:/SFX/GirlShitDude
+  win:
+    Guid:
+      Data1: -1737567794
+      Data2: 1228658079
+      Data3: 824536222
+      Data4: -1128921572
+    Path: event:/SFX/Win
+  fail:
+    Guid:
+      Data1: -1836931000
+      Data2: 1075819286
+      Data3: 72338826
+      Data4: -1452619917
+    Path: event:/SFX/Fail
+  doorSlap:
+    Guid:
+      Data1: -1365163808
+      Data2: 1251160659
+      Data3: -915109207
+      Data4: -2144937865
+    Path: event:/SFX/DoorSlap
+  winToilet:
+    Guid:
+      Data1: -272321831
+      Data2: 1239996979
+      Data3: 854984126
+      Data4: -1135873702
+    Path: event:/SFX/WinToilet
   hoverUI:
     Guid:
       Data1: -290793959
