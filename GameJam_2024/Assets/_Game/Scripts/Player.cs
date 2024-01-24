@@ -1,7 +1,10 @@
+using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class Player : MonoBehaviour
 {
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
     public bool shouldLook = false;
 
     public EventType currentEvent;
+    public ThirdPersonController thirdPersonController;
 
     void Start()
     {
@@ -144,6 +148,10 @@ public class Player : MonoBehaviour
     {
         Debug.Log("LookAtBoss");
         shouldLook = true;
+        thirdPersonController.CanWalk = false;
+
+       // animator.SetBool("Idle", true);
+        animator.SetFloat("Speed", 0);
     }
 
     public void StopLookingAtBoss()
@@ -151,6 +159,7 @@ public class Player : MonoBehaviour
         Debug.Log("StopLookingAtBoss");
         shouldLook = false;
         OnFartEnd?.Invoke();
+        thirdPersonController.CanWalk = true;
 
         DeregisterEvent(EventType.MatchText);
     }
