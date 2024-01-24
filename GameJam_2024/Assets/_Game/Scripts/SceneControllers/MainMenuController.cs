@@ -26,9 +26,8 @@ public class MainMenuController : USceneController
 
     private void SetupSound()
     {
-        //mainMenuMusic = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mainMenuMusic, AudioSceneType.MainMenu);
-        //mainMenuMusic.start();
-        //TODO - future play button
+        mainMenuMusic = AudioManager.Instance.CreateInstance(AudioProvider.Instance.mainMenuMusic, AudioSceneType.MainMenu);
+        mainMenuMusic.start();
     }
 
     private void SetUIElements()

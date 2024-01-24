@@ -120,6 +120,7 @@ public class GameplayController : USceneController
             };
 
             winSound.start();
+            AudioManager.Instance.CleanUp(AudioSceneType.Gameplay);
             var endGameController = new EndGameController(endGameDetails);
             AddChildSceneController(endGameController);
             return;
