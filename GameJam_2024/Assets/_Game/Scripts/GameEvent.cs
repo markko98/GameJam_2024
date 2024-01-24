@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class GameEvent : MonoBehaviour
@@ -7,7 +8,7 @@ public class GameEvent : MonoBehaviour
     public static Action EventFailed;
 
     public EventType type;
-    public Canvas canvas;
+    public TextMeshProUGUI text;
 }
 
 public enum EventType
