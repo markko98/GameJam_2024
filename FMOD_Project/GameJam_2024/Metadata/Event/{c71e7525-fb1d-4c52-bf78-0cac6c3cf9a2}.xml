@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{c71e7525-fb1d-4c52-bf78-0cac6c3cf9a2}">
 		<property name="name">
-			<value>Lose</value>
+			<value>GirlShitDude</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{855cd963-88ac-4a3a-802c-2e77b570e3ad}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{5fd55503-2327-4e08-b36e-0af76c6ed873}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{307c5999-424e-4280-8e31-82e9e069084f}">
@@ -79,7 +82,11 @@
 			<destination>{307c5999-424e-4280-8e31-82e9e069084f}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{dfd3b4c6-ba65-4a16-b56d-631aea359b29}" />
+	<object class="MultiSound" id="{dfd3b4c6-ba65-4a16-b56d-631aea359b29}">
+		<relationship name="sounds">
+			<destination>{c6cf0f42-6ef0-40b3-ab02-0db5aa79ae8d}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{5590d0de-3737-41f8-b322-790d12e9b02c}">
 		<relationship name="effects">
 			<destination>{fc9e90db-1227-48d6-86ac-29e6e4230276}</destination>
@@ -92,6 +99,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{5e4dbd3a-4821-4fc5-8110-32e898235cd1}" />
+	<object class="SingleSound" id="{c6cf0f42-6ef0-40b3-ab02-0db5aa79ae8d}">
+		<relationship name="audioFile">
+			<destination>{d1e62d7d-4f55-4729-82b8-4bd28813f94e}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{fc9e90db-1227-48d6-86ac-29e6e4230276}" />
 	<object class="MixerBusFader" id="{e62c57f4-09a4-4a1c-bc20-509ff2660df6}" />
 </objects>
