@@ -136,7 +136,7 @@ public class GameplayController : USceneController
     {
         outlet.playerRef.Shit();
         
-        DelayedExecutionManager.ExecuteActionAfterDelay(3000, () =>
+        DelayedExecutionManager.ExecuteActionAfterDelay(6000, () =>
         {
             var endGameDetails = new EndGameDetails()
             {
