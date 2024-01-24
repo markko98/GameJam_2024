@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using FMOD.Studio;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -17,6 +18,7 @@ public class Boss : MonoBehaviour
     public bool canInteract = true;
 
     private Player player;
+    
 
     private void OnTriggerEnter(Collider other)
     {

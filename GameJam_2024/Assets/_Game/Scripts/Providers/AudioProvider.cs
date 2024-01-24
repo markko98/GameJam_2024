@@ -11,7 +11,8 @@ public class AudioProvider : MonoBehaviour
     public FMODUnity.EventReference gameplayMusic;
     public FMODUnity.EventReference officeAmbient;
     public FMODUnity.EventReference ventillationAmbient;
-
+    public FMODUnity.EventReference clockTicking;
+    
     [Header("Gameplay")]
     public FMODUnity.EventReference intensityOfficeMusic;
 
@@ -20,6 +21,14 @@ public class AudioProvider : MonoBehaviour
     public FMODUnity.EventReference stomachSound; // couple of them randomly
     public FMODUnity.EventReference fartSound; // couple of them randomly
     public FMODUnity.EventReference fartSoundHuge;
+    public FMODUnity.EventReference bossTalking;
+    public FMODUnity.EventReference clapping;
+    public FMODUnity.EventReference collectablePickup;
+    public FMODUnity.EventReference fall;
+    public FMODUnity.EventReference girlShitDude;
+    public FMODUnity.EventReference fail;
+    public FMODUnity.EventReference doorSlap;
+    public FMODUnity.EventReference winToilet;
 
     [Header("UI")]
     public FMODUnity.EventReference hoverUI;

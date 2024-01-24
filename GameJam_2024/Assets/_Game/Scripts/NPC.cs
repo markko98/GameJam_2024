@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
@@ -7,8 +8,14 @@ public class NPC : MonoBehaviour
     Animator animator;
     public Transform player;
 
+    private EventInstance clappingSound;
+    private EventInstance voiceline;
+
     void Start()
     {
+        clappingSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.clapping, AudioSceneType.Gameplay);
+        voiceline = AudioManager.Instance.CreateInstance(AudioProvider.Instance.girlShitDude, AudioSceneType.Gameplay);
+
         animator = GetComponent<Animator>();
         Player.OnFart += StartClapping;
         Player.OnFartEnd += StopClapping;
@@ -18,8 +25,9 @@ public class NPC : MonoBehaviour
     {
         animator.SetBool("isClapping", true);
         transform.LookAt(player);
-        // TODO
-        Debug.Log("Clapping Sound");
+        
+        clappingSound.start();
+        voiceline.start();
     }
 
     private void StopClapping()

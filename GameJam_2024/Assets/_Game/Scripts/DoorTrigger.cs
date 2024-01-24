@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
+using FMOD.Studio;
 
 public class DoorTrigger : MonoBehaviour
 {
@@ -9,6 +11,13 @@ public class DoorTrigger : MonoBehaviour
     public bool shouldLaunch = false;
 
     private bool doorOpened;
+
+    private EventInstance doorSlapSound;
+
+    private void Start()
+    {
+        doorSlapSound = AudioManager.Instance.CreateInstance(AudioProvider.Instance.doorSlap, AudioSceneType.Gameplay);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +29,8 @@ public class DoorTrigger : MonoBehaviour
 
             doorOpened = true;
             if (!shouldLaunch) return;
-            
+
+            doorSlapSound.start();
             other.gameObject.GetComponent<Player>().LaunchPlayer();
         }
     }
