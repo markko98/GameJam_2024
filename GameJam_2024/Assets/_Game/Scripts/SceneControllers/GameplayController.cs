@@ -115,7 +115,7 @@ public class GameplayController : USceneController
     {
         if (objectiveController.CanFinishGame())
         {
-            // SHow same success screen;
+            objectiveController.CompleteObjective(ObjectiveType.Toilet);
             var endGameDetails = new EndGameDetails()
             {
                 isVictory = true,
