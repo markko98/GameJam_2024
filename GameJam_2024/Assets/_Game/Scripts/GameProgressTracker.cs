@@ -4,16 +4,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class GameProgressTracker : MonoBehaviour
 {
     [SerializeField] float initialTime = 10;
     [SerializeField] float currentTime;
+    [SerializeField] Volume volume;
+
+    private Vignette vignette;
+    private ChromaticAberration chromaticAberration;
+
     public float CurrentTime
     {
         get { return currentTime; }
-        private set {
+        private set
+        {
             currentTime = value;
             if (currentTime <= 0)
             {
@@ -46,6 +54,15 @@ public class GameProgressTracker : MonoBehaviour
     {
         didGameStart = true;
         CurrentTime = initialTime;
+        if (volume.profile.TryGet(out vignette))
+        {
+            vignette.intensity.value = 0;
+        }
+
+        if (volume.profile.TryGet(out chromaticAberration))
+        {
+            chromaticAberration.intensity.value = 0;
+        }
     }
     private void Update()
     {
@@ -57,8 +74,18 @@ public class GameProgressTracker : MonoBehaviour
     {
         timerText.SetText(Utils.FormatTime(CurrentTime));
         timerSlider.DOValue(CurrentTime / initialTime, 0.25f);
-        var endColor = Color.Lerp(emptyColor, fullColor, CurrentTime/initialTime);
+        var endColor = Color.Lerp(emptyColor, fullColor, CurrentTime / initialTime);
         timerSliderFillImage.DOColor(endColor, 0.25f);
+        if (volume.profile.TryGet(out vignette))
+        {
+            vignette.intensity.value = (initialTime - currentTime) / initialTime / 2;
+        }
+
+        if (volume.profile.TryGet(out chromaticAberration))
+        {
+            chromaticAberration.intensity.value = (initialTime - currentTime) / initialTime;
+
+        }
     }
 
     public void AddTime(float amount)

@@ -33,7 +33,8 @@ public class GameplayController : USceneController
             message = tutorialText,
             option1 = "Okay",
             option2 = "",
-            option1Callback = () => {
+            option1Callback = () =>
+            {
                 StartGame();
             },
             option2Callback = null
@@ -42,7 +43,7 @@ public class GameplayController : USceneController
 
         outlet.gameProgressTracker.OnTimeRunOut += OnTimerRanOut;
         outlet.goalTrigger.GoalReached += OnGoalTriggerReached;
-        
+
         SetupSound();
     }
 
@@ -60,7 +61,7 @@ public class GameplayController : USceneController
     private void Update()
     {
         if (pauseMenuCalled || !Input.GetKeyDown(KeyCode.Escape)) return;
-        
+
         pauseMenuCalled = true;
         var pauseMenuController = new PauseMenuController();
         AddChildSceneController(pauseMenuController);
@@ -95,6 +96,8 @@ public class GameplayController : USceneController
 
     public void OnTimerRanOut()
     {
+        outlet.playerRef.Shit();
+
         var endGameDetails = new EndGameDetails()
         {
             isVictory = false,

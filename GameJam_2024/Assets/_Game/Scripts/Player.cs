@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public static Action OnFartEnd;
 
     public ParticleSystem fart;
+    public ParticleSystem shit;
     public Transform boss;
     public Transform playerArmature;
     public bool shouldLook = false;
@@ -53,15 +54,15 @@ public class Player : MonoBehaviour
             playerArmature.LookAt(boss);
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartFarting();
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    StartFarting();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            LaunchPlayer();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    LaunchPlayer();
+        //}
 
         if (animator.IsAnimationPlaying("Get Up")) return;
         if (AnimationDone == null) return;
@@ -164,6 +165,25 @@ public class Player : MonoBehaviour
     {
         StartCoroutine(WaitAndFart());
     }
+
+    public void Shit()
+    {
+        StartCoroutine(WaitAndShit());
+    }
+
+    private IEnumerator WaitAndShit()
+    {
+        animator.SetBool("Shitting", true);
+        GetComponent<BoxCollider>().enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        // TODO - Game Over
+        // TODO - Sound
+        Debug.Log("Shit Sound!");
+        shit.Play();
+        ParticleSystem.EmissionModule em = shit.emission;
+        em.enabled = true;
+    }
+
 
     public void RegisterEvent(EventType type)
     {
