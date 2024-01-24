@@ -24,9 +24,9 @@ public class ObjectiveView : MonoBehaviour
 
         var sequence = DOTween.Sequence();
         sequence
-            .Append(transform.DOScale(1.2f, 0.2f))
-            .Append(transform.DOScale(1, 0.2f))
-            .Append(transform.DOMove(new Vector3(-100f, transform.position.y, transform.position.z), 0.2f))
+            .Append(transform.DOScale(1.2f, 0.3f))
+            .Append(transform.DOScale(1, 0.3f))
+            .Append(transform.DOMove(new Vector3(2600f, transform.position.y, transform.position.z), 0.3f))
             .OnComplete(() => gameObject.transform.SetParent(null));
     }
 

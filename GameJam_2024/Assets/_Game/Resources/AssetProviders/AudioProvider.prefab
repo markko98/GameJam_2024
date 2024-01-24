@@ -46,18 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuMusic:
     Guid:
+      Data1: -468332241
+      Data2: 1121280491
+      Data3: -186183804
+      Data4: -84376484
+    Path: event:/Music/MainMenu
+  gameplayMusic:
+    Guid:
       Data1: 772522197
       Data2: 1215970952
       Data3: 883039422
       Data4: -1727308981
     Path: event:/Ambient/Office
-  gameplayMusic:
-    Guid:
-      Data1: -666252148
-      Data2: 1111799947
-      Data3: 1385894335
-      Data4: 1295275770
-    Path: event:/UI/Click
   officeAmbient:
     Guid:
       Data1: 772522197
@@ -74,10 +74,10 @@ MonoBehaviour:
     Path: event:/Ambient/Ventillation
   clockTicking:
     Guid:
-      Data1: 1900326724
-      Data2: 1106170462
-      Data3: 2132095371
-      Data4: 328618275
+      Data1: 1401739685
+      Data2: 1150409665
+      Data3: -1928056648
+      Data4: -904273481
     Path: event:/Ambient/ClockTicking
   intensityOfficeMusic:
     Guid:
@@ -116,17 +116,17 @@ MonoBehaviour:
     Path: event:/SFX/HugeFart
   bossTalking:
     Guid:
-      Data1: -574757484
-      Data2: 1079453036
-      Data3: -1027153496
-      Data4: -778539136
-    Path: event:/SFX/BossTalking
+      Data1: -794375382
+      Data2: 1124499451
+      Data3: 1170190241
+      Data4: -1147149450
+    Path: event:/SFX/BossTalk
   clapping:
     Guid:
-      Data1: 1829116969
-      Data2: 1118107438
-      Data3: -1250948469
-      Data4: 877952802
+      Data1: 1362187078
+      Data2: 1286063191
+      Data3: -1315162442
+      Data4: 1985646545
     Path: event:/SFX/Clapping
   collectablePickup:
     Guid:
@@ -149,13 +149,6 @@ MonoBehaviour:
       Data3: -1408468801
       Data4: -1560724372
     Path: event:/SFX/GirlShitDude
-  win:
-    Guid:
-      Data1: -1737567794
-      Data2: 1228658079
-      Data3: 824536222
-      Data4: -1128921572
-    Path: event:/SFX/Win
   fail:
     Guid:
       Data1: -1836931000

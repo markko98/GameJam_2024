@@ -18,8 +18,13 @@ public class Boss : MonoBehaviour
     public bool canInteract = true;
 
     private Player player;
-    
 
+    private EventInstance npcTalking;
+
+    private void Start()
+    {
+        npcTalking = AudioManager.Instance.CreateInstance(AudioProvider.Instance.bossTalking, AudioSceneType.Gameplay);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && canInteract)
@@ -34,6 +39,7 @@ public class Boss : MonoBehaviour
 
     public void StartTalking()
     {
+        npcTalking.start();
         isTalking = true;
         virtualCamera.gameObject.SetActive(true);
         animator.SetBool("isTalking", isTalking);
@@ -43,6 +49,7 @@ public class Boss : MonoBehaviour
 
     public void StopTalking()
     {
+        npcTalking.stop(STOP_MODE.IMMEDIATE);
         isTalking = false;
         animator.SetBool("isTalking", isTalking);
         virtualCamera.gameObject.SetActive(false);
