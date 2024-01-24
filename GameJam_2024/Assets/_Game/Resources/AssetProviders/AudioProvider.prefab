@@ -191,6 +191,13 @@ MonoBehaviour:
       Data3: 46101417
       Data4: -1383420044
     Path: event:/SFX/MashingClicks
+  doorLocked:
+    Guid:
+      Data1: 1003867978
+      Data2: 1085440475
+      Data3: 1278962064
+      Data4: 696454338
+    Path: event:/SFX/LockedSound
   hoverUI:
     Guid:
       Data1: -290793959
