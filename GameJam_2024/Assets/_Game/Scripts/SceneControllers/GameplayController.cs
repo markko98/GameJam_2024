@@ -40,11 +40,8 @@ public class GameplayController : USceneController
             message = tutorialText,
             option1 = "Okay",
             option2 = "",
-            option1Callback = () =>
-            {
-                StartGame();
-            },
-            option2Callback = null
+            option1Callback = StartGame,
+            option2Callback = StartGame
         };
         ModalWindow.Instance.ShowModal(modalData);
 
