@@ -22,6 +22,8 @@ public class GameplayController : USceneController
     private float timerGrowl;
     private float timeForGrowl;
 
+    private DisposeBag disposeBag = new DisposeBag();
+
     public override void SceneDidLoad()
     {
         base.SceneDidLoad();
