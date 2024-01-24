@@ -32,7 +32,8 @@ public class ObjectiveController
 
     public bool CanFinishGame()
     {
-        return objectives.All(objective  => objective.Value.isCompleted);
+        return objectives.Where(objective => objective.Key != ObjectiveType.Toilet)
+            .All(objective  => objective.Value.isCompleted);
     }
 
     public static string GetDescriptionForObjective(ObjectiveType type)
