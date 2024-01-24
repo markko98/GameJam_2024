@@ -14,7 +14,7 @@ public class GameplayController : USceneController
 
     private ObjectiveController objectiveController = new ObjectiveController();
     string tutorialText = "1.Limber up with a quick office stretch, but not for too long.\r\n\r\n2. Gather essential items on your way. A clever pooper knows what's needed for a successful bathroom mission.\r\n\r\n3. Celebrate with a well-deserved relief!";
-
+    string storyText = "In the midst of a Zoom meeting, Dave's stomach churned ominously as he realized he'd eaten something disagreeable. Panic set in, cramps seizing his legs, turning the dash to the bathroom into a survival mission.\n\nDiscomfort escalated with each passing minute as colleagues droned on, oblivious. In a code red situation, Dave discreetly excused himself, earning curious glances from coworkers.";
     private bool pauseMenuCalled;
     private Vector2 randomFartDelay = new Vector2(3, 8);
     private float timerFart = 0;
@@ -34,16 +34,7 @@ public class GameplayController : USceneController
         var presenter = new LoadingScreenPresenter(LoadingScreenDirection.Vertical);
         presenter.HideLoadingScreen();
 
-        var modalData = new ModalData()
-        {
-            title = "Tutorial",
-            message = tutorialText,
-            option1 = "Okay",
-            option2 = "",
-            option1Callback = StartGame,
-            option2Callback = StartGame
-        };
-        ModalWindow.Instance.ShowModal(modalData);
+        ShowStoryModal();
 
         outlet.gameProgressTracker.OnTimeChangePercentageLeft += TimeChangedPercentage;
         outlet.gameProgressTracker.OnTimeRunOut += OnTimerRanOut;
@@ -62,7 +53,7 @@ public class GameplayController : USceneController
         outlet.gameProgressTracker.Setup();
         SetUIElements();
         outlet.playerController.CanWalk = true;
-        
+
         timerFart = 0;
         timerGrowl = 0;
         timeForFart = randomFartDelay.GetRandom();
@@ -132,7 +123,7 @@ public class GameplayController : USceneController
     public void OnTimerRanOut()
     {
         outlet.playerRef.Shit();
-        
+
         DelayedExecutionManager.ExecuteActionAfterDelay(6000, () =>
         {
             var endGameDetails = new EndGameDetails()
@@ -180,6 +171,38 @@ public class GameplayController : USceneController
         outlet.gameProgressTracker.OnTimeRunOut -= OnTimerRanOut;
         GameTicker.SharedInstance.Update -= Update;
         GameTicker.SharedInstance.Update -= TimersUpdate;
+
+    }
+
+    public void ShowStoryModal()
+    {
+        var modalData = new ModalData()
+        {
+            title = "Monday Morning",
+            message = storyText,
+            option1 = "Okay",
+            option2 = "",
+            option1Callback = ShowTutorialModal,
+            option2Callback = ShowTutorialModal
+        };
+        ModalWindow.Instance.ShowModal(modalData);
+    }
+
+    public void ShowTutorialModal()
+    {
+        DelayedExecutionManager.ExecuteActionAfterDelay(1000, () =>
+        {
+            var modalData = new ModalData()
+            {
+                title = "Tutorial",
+                message = tutorialText,
+                option1 = "Okay",
+                option2 = "",
+                option1Callback = StartGame,
+                option2Callback = StartGame
+            };
+            ModalWindow.Instance.ShowModal(modalData);
+        });
 
     }
 }
