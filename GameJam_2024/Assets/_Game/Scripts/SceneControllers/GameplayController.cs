@@ -40,11 +40,8 @@ public class GameplayController : USceneController
             message = tutorialText,
             option1 = "Okay",
             option2 = "",
-            option1Callback = () =>
-            {
-                StartGame();
-            },
-            option2Callback = null
+            option1Callback = StartGame,
+            option2Callback = StartGame
         };
         ModalWindow.Instance.ShowModal(modalData);
 
@@ -136,7 +133,7 @@ public class GameplayController : USceneController
     {
         outlet.playerRef.Shit();
         
-        DelayedExecutionManager.ExecuteActionAfterDelay(3000, () =>
+        DelayedExecutionManager.ExecuteActionAfterDelay(6000, () =>
         {
             var endGameDetails = new EndGameDetails()
             {
@@ -144,7 +141,7 @@ public class GameplayController : USceneController
                 timeRemaining = outlet.gameProgressTracker.CurrentTime
             };
             var endGameController = new EndGameController(endGameDetails);
-            PushSceneController(endGameController);
+            AddChildSceneController(endGameController);
         }).disposeBy(disposeBag);
     }
 
