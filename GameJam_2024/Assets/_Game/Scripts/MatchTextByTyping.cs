@@ -67,8 +67,6 @@ public class MatchTextByTyping : GameEvent
             maxTime -= Time.deltaTime;
             if (maxTime < 0)
             {
-                // TODO - inform player
-                Debug.Log("Time is up!");
                 text.text = "You could not avoid the colleague!";
                 StopTyping();
                 mashFail.start();
@@ -104,8 +102,6 @@ public class MatchTextByTyping : GameEvent
             text.text = "Wrong key is pressed!";
 
             StopTyping();
-            // TODO
-            Debug.Log("Wrong Key!");
             mashFail.start();
             EventFailed?.Invoke();
         }

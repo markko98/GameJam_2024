@@ -1,12 +1,13 @@
-using System;
-using DG.Tweening.Core.Easing;
-using System.Collections;
-using System.Collections.Generic;
+
+using TMPro;
 using FMOD.Studio;
 using UnityEngine;
 
 public class DoorLockedTrigger : MonoBehaviour
 {
+
+    public TextMeshProUGUI text;
+
     private EventInstance lockedSound;
 
     private void Start()
@@ -18,7 +19,16 @@ public class DoorLockedTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            text.text = "Ohh shit!! It's locked.";
             lockedSound.start();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            text.text = "";
         }
     }
 }

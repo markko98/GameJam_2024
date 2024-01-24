@@ -81,7 +81,5 @@ public class ButtonMashing : GameEvent
 
         yield return new WaitForSeconds(waitTime);
         started = true;
-        // TODO - Inform player
-        Debug.Log("Mashing started!");
     }
 }
