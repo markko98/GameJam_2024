@@ -43,7 +43,7 @@ public class ObjectiveController
             ObjectiveType.Toilet => "Get to the toilet before the time runs out!!",
             ObjectiveType.ToiletPaper => "Pick up toilet paper!!",
             ObjectiveType.Magazine => "Take some magazines off the kitchen counter!!",
-            ObjectiveType.Phone => "Take the phone from your office, what are you going to do? Read magazines? We are not in THAT kind of hurry.",
+            ObjectiveType.Phone => "Take the phone from your office!!",
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }
