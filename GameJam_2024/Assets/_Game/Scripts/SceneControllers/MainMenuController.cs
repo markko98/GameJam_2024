@@ -1,6 +1,7 @@
 using FMOD.Studio;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -39,6 +40,9 @@ public class MainMenuController : USceneController
 
         outlet.quitButton.onClick.AddListener(() =>
         {
+            #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+            #endif
             Application.Quit();
         });
     }
